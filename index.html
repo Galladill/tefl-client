@@ -7,13 +7,13 @@
     <meta name="keywords" content="Insert keywords here" />
     <meta name="description" content="Insert description here" />
     <base href="/">
-    <title>Title Here</title>
-    <!--<link rel="stylesheet" href="libs/styles/bootstrap.min.css">-->
+    <title>TEFL Planr</title>
     <!--TODO: Add favicon-->
 </head>
 
 <body>
     <h1>TEFL Planr</h1>
+    <ng-view></ng-view>
 
     <!-- Include node modules here -->
     <script src="./node_modules/jquery/dist/jquery.js"></script> <!-- jQuery must be loaded before angular -->
@@ -22,6 +22,12 @@
 
     <!-- Include our own files here -->
     <script src="./app/app.module.js"></script>
+
+    <script src="./app/components/signup/signup.module.js"></script>
+    <script src="./app/components/signup/signup.controller.js"></script>
+
+    <script src="./app/components/user/user.module.js"></script>
+    <script src="./app/components/user/user.controller.js"></script>
 
 </body>
 

@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'test/*.spec.js', included: false},
+      {pattern: './test/signup/signup.controller.spec.js', included: false},
     ],
 
     plugins : [

@@ -17,11 +17,11 @@ describe('exampleService', function () {
 
     describe('getData function', function () {
         it('should get some data', function () {
-            $httpBackend.whenGET('abc').respond(200, exampleData);
-            dataService.getData('abc').then(function (res) {
-                expect(res).toEqual(exampleData);
-            });
-            $httpBackend.flush();
-        });
+        //     $httpBackend.whenGET('abc').respond(200, exampleData);
+        //     dataService.getData('abc').then(function (res) {
+        //         expect(res).toEqual(exampleData);
+        //     });
+        //     $httpBackend.flush();
+        // });
     });
 });

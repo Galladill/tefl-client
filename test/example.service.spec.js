@@ -22,6 +22,6 @@ describe('exampleService', function () {
         //         expect(res).toEqual(exampleData);
         //     });
         //     $httpBackend.flush();
-        // });
+        });
     });
 });

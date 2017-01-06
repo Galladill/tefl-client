@@ -4,7 +4,7 @@
   "description": "The front-end angular app for the tefl project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/**/*.spec.js",
     "start": "node index.js"
   },
   "repository": {

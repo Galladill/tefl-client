@@ -4,7 +4,7 @@
   "description": "The front-end angular app for the tefl project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.spec.js",
+    "test": "karma start",
     "start": "node index.js"
   },
   "repository": {
@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/Galladill/tefl-client",
   "dependencies": {
-    "angular": "^1.6.1",
-    "angular-route": "^1.6.1",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-aria": "~1.5.0",
+    "angular-material": "^1.1.1",
+    "angular-route": "~1.5.0",
     "express": "^4.14.0",
     "jquery": "^3.1.1"
   },

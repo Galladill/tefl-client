@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('user')
-        .controller('UserController', UserController);
+        .module('login')
+        .controller('LoginController', LoginController);
 
-    UserController.$inject = ['$scope'];
+    LoginController.$inject = ['$scope'];
 
-    function UserController($scope) {
+    function LoginController($scope) {
         // Attach functions to the controller here.
 		var vm = this;
 		// vm.loadData = _loadData;

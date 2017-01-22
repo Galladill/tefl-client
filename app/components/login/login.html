@@ -1,0 +1,81 @@
+<div class="centered-box">
+	<h2 class="text-center">TEFL Planr</h2>
+	<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+		<md-tab label="login">
+            </br>
+			<form name="loginForm">
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>Email</label>
+						<input required type="email" name="email" ng-model="Login.user.email">
+						<div ng-messages="loginForm.email.$error">
+							<div ng-show="loginForm.email.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>Password</label>
+						<input required type="password" name="password" ng-model="Login.user.password">
+						<div ng-messages="loginForm.password.$error">
+							<div ng-show="loginForm.password.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<md-button ng-click="Login.login()" class="md-raised md-primary">Login</md-button>
+			</form>
+		</md-tab>
+		<md-tab label="signup">
+			<form name="signupForm">
+                </br>
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>Email</label>
+						<input required type="email" name="email" ng-model="Login.user.email">
+						<div ng-messages="signupForm.email.$error">
+							<div ng-show="signupForm.email.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>First Name</label>
+						<input required name="firstName" ng-model="Login.user.firstName">
+						<div ng-messages="signupForm.firstName.$error">
+							<div ng-show="signupForm.firstName.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>Last Name</label>
+						<input required name="lastName" ng-model="Login.user.lastName">
+						<div ng-messages="signupForm.lastName.$error">
+							<div ng-show="signupForm.lastName.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>Password</label>
+						<input required type="password" name="password" ng-model="Login.user.password">
+						<div ng-messages="signupForm.password.$error">
+							<div ng-show="signupForm.password.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container flex="100">
+						<label>Confirm Password</label>
+						<input required type="password" name="confirmPassword" ng-model="Login.user.confirmPassword">
+						<div ng-messages="signupForm.confirmPassword.$error">
+							<div ng-show="signupForm.confirmPassword.$invalid" ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+				</div>
+				<md-button ng-click="Login.signup()" class="md-raised md-primary">signup</md-button>
+			</form>
+		</md-tab>
+	</md-tabs>
+</div>

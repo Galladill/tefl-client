@@ -1,7 +1,7 @@
 // Karma configuration
-// Generated on Sun Jan 01 2017 18:25:56 GMT-0600 (CST)
+// Generated on Wed Jan 11 2017 16:39:34 GMT-0600 (CST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,13 +15,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'test/*.spec.js', included: false},
+      './node_modules/jquery/dist/jquery.js',
+      './node_modules/angular/angular.js',
+      './node_modules/angular-route/angular-route.js',
+      './node_modules/angular-animate/angular-animate.js',
+      './node_modules/angular-aria/angular-aria.js',
+      './node_modules/angular-messages/angular-messages.js',
+      './node_modules/angular-material/angular-material.js',
+      './node_modules/angular-mocks/angular-mocks.js',
+      './app/app.module.js',
+      './app/components/login/login.module.js',
+      './app/components/login/login.controller.js',
+      'test/**/*.spec.js'
     ],
 
-    plugins : [
-        'karma-chrome-launcher',
-        'karma-jasmine'
-    ],
 
     // list of files to exclude
     exclude: [
@@ -59,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
@@ -69,5 +76,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  });
-};
+  })
+}

@@ -22,7 +22,7 @@
 			delete vm.user.lastName;
 
 			authService.login(vm.user.email, vm.user.password).then(function(res) {
-				console.log(res);
+				console.log('you are logged in as user', res);
 			});
 		};
 
@@ -30,7 +30,7 @@
 			if (vm.user.confirmPassword === vm.user.password) {
 				delete vm.user.confirmPassword;
 				userService.createUser(vm.user).then(function(res) {
-					console.log('youre logged in as user', res);
+					console.log('you created user', res);
 				});
 			} else {
 				console.log('passwords dont match');

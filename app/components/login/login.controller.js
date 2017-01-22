@@ -10,6 +10,7 @@
     function LoginController($scope) {
         // Attach functions to the controller here.
 		var vm = this;
+		$scope.tabs = ['test', 'atw'];
 		// vm.loadData = _loadData;
 		
 		// Any logic that needs to run when the controller loads should be placed here.

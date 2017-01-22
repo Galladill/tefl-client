@@ -1,0 +1,17 @@
+.tefl-container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centered-box {
+    width: 360px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+.text-center {
+    text-align: center;
+}

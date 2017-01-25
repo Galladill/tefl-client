@@ -7,9 +7,6 @@
 
         // All routes that require the user to be logged in
         'privateRoutes': ['/example'],
-
-        // All routes that exist in the app but do not require user authentication
-        'publicRoutes': ['/login']
     };
 
     angular

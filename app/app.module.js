@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('app', ['ngStorage', 'ngMaterial', 'login']);
 
-    app.config(['$httpProvider', function ($httpProvider) {
+    app.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
         $httpProvider.interceptors.push(function () {
             var SERVER = 'http://localhost:9001';
             return {
@@ -24,5 +24,7 @@
                 }
             };
         });
+
+        $routeProvider.otherwise('/');
     }]);
 })();

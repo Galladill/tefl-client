@@ -10,13 +10,14 @@ describe('Login Controller', function() {
 		firstName: 'Bob',
 		lastName: 'Alob'
 	};
-
-	beforeEach(inject(function(_$controller_){
-    	$controller = _$controller_;
+	console.log('asd');
+	beforeEach(inject(function($controller){
+		console.log('AESRDTFYTESFDG');
 		LoginCtrl = $controller('LoginController', { $scope: $scope });
   	}));
 
 	it('should be created', function () {
+		console.log('WAAAAAAT');
 		expect(LoginCtrl).not.toEqual(undefined);
 	});
 

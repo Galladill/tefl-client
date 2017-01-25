@@ -11,37 +11,34 @@
         activate();
         function activate() {
             $rootScope.$on('$routeChangeSuccess', function (event, currentRoute, previousRoute) {
-                if (authConfig.publicRoutes.indexOf(currentRoute.$$route.originalPath) >= 0) {
-                    // If this is a public route, just continue
-                } else if (authConfig.privateRoutes.indexOf(currentRoute.$$route.originalPath) >= 0) {
-                    // If this route is part of the private routes list and accessToken is expired, then attempt a refresh
-                    var now = Date.now();
-                    var expiresAt;
-                    if ($localStorage.tefl) {
-                        expiresAt = $localStorage.tefl.accessTokenExpires * 1000;
-                        if (expiresAt < now) {
-                            event.preventDefault();
-                            service.refresh().then(
-                                function (data) {
-                                    // You're still authorized, continue to the page.
-                                    $route.reload();
-                                },
-                                function (data) {
-                                    // You're not authorized, redirect
-                                    delete $localStorage.tefl;
-                                    $location.path(authConfig.redirectRoute);
-                                }
-                            );
+                if (currentRoute.$$route) {
+                    if (authConfig.privateRoutes.indexOf(currentRoute.$$route.originalPath) >= 0) {
+                        // If this route is part of the private routes list and accessToken is expired, then attempt a refresh
+                        var now = Date.now();
+                        var expiresAt;
+                        if ($localStorage.tefl) {
+                            expiresAt = $localStorage.tefl.accessTokenExpires * 1000;
+                            if (expiresAt < now) {
+                                event.preventDefault();
+                                service.refresh().then(
+                                    function (data) {
+                                        // You're still authorized, continue to the page.
+                                        $route.reload();
+                                    },
+                                    function (data) {
+                                        // You're not authorized, redirect
+                                        delete $localStorage.tefl;
+                                        $location.path(authConfig.redirectRoute);
+                                    }
+                                );
+                            } else {
+                                // accessToken not expired, no refresh required.
+                            }
                         } else {
-                            // accessToken not expired, no refresh required.
+                            // You don't have token information, redirect
+                            $location.path(authConfig.redirectRoute);
                         }
-                    } else {
-                        // You don't have token information, redirect
-                        $location.path(authConfig.redirectRoute);
                     }
-                } else {
-                    // If this route is not in the either route list, then redirect
-                    $location.path(authConfig.redirectRoute);
                 }
             });
         }

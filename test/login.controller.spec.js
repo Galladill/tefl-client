@@ -4,16 +4,19 @@ describe('Login Controller', function() {
 	beforeEach(module('app'));
 
 	// Inject dependencies and mock services here
-	var $controller, LoginCtrl, authServiceMock, userServiceMock;
-	beforeEach(inject(function($controller, _authServiceMock_, _userServiceMock_){
+	var $controller, LoginCtrl, authServiceMock, userServiceMock, $location, $mdToast;
+	beforeEach(inject(function($controller, _authServiceMock_, _userServiceMock_, _$location_, _$mdToast_){
 		authServiceMock = _authServiceMock_;
 		userServiceMock = _userServiceMock_;
-		LoginCtrl = $controller('LoginController', { authService: authServiceMock, userService: userServiceMock });
+		$location = _$location_;
+		$mdToast = _$mdToast_;
+		LoginCtrl = $controller('LoginController', { authService: authServiceMock, userService: userServiceMock, $location: $location, $mdToast: $mdToast });
   	}));
 
 	// Create an variables we need for our test here
 	var testUser = {
 		email: 'bobalob@aol.com',
+		confirmEmail: 'bobalob@aol.com',
 		password: 'password123',
 		confirmPassword: 'password123',
 		firstName: 'Bob',
@@ -32,21 +35,47 @@ describe('Login Controller', function() {
 
 	// Describe & spec all of the controller's functions here
 	describe('login function', function(){
-		beforeEach(function(){
+		it('should login and redirect on successful login', function(){
 			LoginCtrl.user = testUser;
 			LoginCtrl.login();
-		});
-		it('should remove unnecessary properties', function(){
 			expect(LoginCtrl.user.firstName).toEqual(undefined);
 			expect(LoginCtrl.user.lastName).toEqual(undefined);
 			expect(LoginCtrl.user.confirmPassword).toEqual(undefined);
-		});
-		it('should redirect on successful login', function(){
-
+			expect(LoginCtrl.user.confirmEmail).toEqual(undefined);
+			expect($location.path()).toBe('');
 		});
 	});
 
 	describe('signup function', function(){
+		it('should signup and redirect on successful signup', function(){
+			LoginCtrl.user = testUser;
+			LoginCtrl.signup();
+			expect(LoginCtrl.user.confirmPassword).toEqual(undefined);
+			expect(LoginCtrl.user.confirmEmail).toEqual(undefined);
+			expect($location.path()).toBe('');
+		});
+		it('should show an error message on unmatched password', function(){
+			LoginCtrl.user = {
+				email: 'bobalob@aol.com',
+				confirmEmail: 'bobalob@aol.com',
+				password: 'prd123',
+				confirmPassword: 'password123',
+			};
+			spyOn($mdToast, 'showSimple');
+			LoginCtrl.signup();
+			expect($mdToast.showSimple).toHaveBeenCalledWith('Passwords fields must match!');
+		});
+		it('should show an error message on unmatched email', function(){
+			LoginCtrl.user = {
+				email: 'bo@aol.com',
+				confirmEmail: 'bobalob@aol.com',
+				password: 'password123',
+				confirmPassword: 'password123',
+			};
+			spyOn($mdToast, 'showSimple');
+			LoginCtrl.signup();
+			expect($mdToast.showSimple).toHaveBeenCalledWith('Email fields must match!');
+		});
 
 	});
 });

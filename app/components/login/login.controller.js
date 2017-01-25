@@ -5,9 +5,9 @@
         .module('login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['authService', 'userService'];
+    LoginController.$inject = ['authService', 'userService', '$location', '$mdToast'];
 
-    function LoginController(authService, userService) {
+    function LoginController(authService, userService, $location, $mdToast) {
         // Attach functions to the controller here.
 		var vm = this;
 		vm.login = _login;
@@ -18,22 +18,26 @@
 		// Define functions here.
 		function _login(){
 			delete vm.user.confirmPassword;
+			delete vm.user.confirmEmail;
 			delete vm.user.firstName;
 			delete vm.user.lastName;
 
 			authService.login(vm.user.email, vm.user.password).then(function(res) {
-				console.log('you are logged in as user', res);
+				$location.path('');
 			});
 		};
 
 		function _signup(){
-			if (vm.user.confirmPassword === vm.user.password) {
-				delete vm.user.confirmPassword;
-				userService.createUser(vm.user).then(function(res) {
-					console.log('you created user', res);
-				});
+			if (vm.user.confirmPassword !== vm.user.password) {
+				$mdToast.showSimple('Passwords fields must match!');
+			} else if (vm.user.confirmEmail !== vm.user.email) {
+				$mdToast.showSimple('Email fields must match!');
 			} else {
-				console.log('passwords dont match');
+				delete vm.user.confirmPassword;
+				delete vm.user.confirmEmail;
+				userService.createUser(vm.user).then(function(res) {
+					$location.path('');
+				});
 			}
 		};
     }

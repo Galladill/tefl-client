@@ -5,9 +5,9 @@
         .module('login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', 'authService', 'userService'];
+    LoginController.$inject = ['authService', 'userService'];
 
-    function LoginController($scope, authService, userService) {
+    function LoginController(authService, userService) {
         // Attach functions to the controller here.
 		var vm = this;
 		vm.login = _login;

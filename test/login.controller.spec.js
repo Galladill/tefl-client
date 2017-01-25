@@ -1,8 +1,17 @@
 describe('Login Controller', function() {
 
+	// Bootstrap our app here
 	beforeEach(module('app'));
 
-	var $controller, LoginCtrl, $scope;
+	// Inject dependencies and mock services here
+	var $controller, LoginCtrl, authServiceMock, userServiceMock;
+	beforeEach(inject(function($controller, _authServiceMock_, _userServiceMock_){
+		authServiceMock = _authServiceMock_;
+		userServiceMock = _userServiceMock_;
+		LoginCtrl = $controller('LoginController', { authService: authServiceMock, userService: userServiceMock });
+  	}));
+
+	// Create an variables we need for our test here
 	var testUser = {
 		email: 'bobalob@aol.com',
 		password: 'password123',
@@ -10,21 +19,16 @@ describe('Login Controller', function() {
 		firstName: 'Bob',
 		lastName: 'Alob'
 	};
-	console.log('asd');
-	beforeEach(inject(function($controller){
-		console.log('AESRDTFYTESFDG');
-		LoginCtrl = $controller('LoginController', { $scope: $scope });
-  	}));
-
+	
+	// Ensure that what we're testing is being created here
 	it('should be created', function () {
-		console.log('WAAAAAAT');
 		expect(LoginCtrl).not.toEqual(undefined);
 	});
 
 	// Any properties that are set when controller instantiates should be spec'd here
-	it('should set hello to world ', function() {
-		// expect(LoginCtrl.hello).toEqual('world');
-	});
+	// it('should set hello to world ', function() {
+	// 	expect(LoginCtrl.hello).toEqual('world');
+	// });
 
 	// Describe & spec all of the controller's functions here
 	describe('login function', function(){

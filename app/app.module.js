@@ -3,7 +3,7 @@
 
     app.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
         $httpProvider.interceptors.push(function () {
-            var SERVER = 'http://localhost:9001';
+            var SERVER = 'http://54.202.243.31:9001';
             return {
                 'request': function (config) {
                     if (config.url.indexOf('.html') === -1) {

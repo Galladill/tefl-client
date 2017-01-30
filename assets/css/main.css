@@ -5,11 +5,10 @@
 }
 
 .centered-box {
-    width: 360px;
-    height: 500px;
+    max-width: 360px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20%;
+    margin-top: 30px;
 }
 
 .text-center {
@@ -43,4 +42,11 @@
 
 .full-height-container {
     height: 100vh;
+}
+
+#no-account {
+    display: block;
+    margin-top: 10px;
+    font-size: .8em;
+    text-decoration: none;
 }

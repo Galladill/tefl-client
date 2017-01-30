@@ -1,13 +1,21 @@
-<div layout="row" layout-xs="column">
+<div layout-sm="column" layout-gt-sm="row">
 	<div flex class="full-height-container">
-		<div id="login-background">
+		<div id="login-background" layout="column" layout-align="start center">
 			<h1 id="login-header" class="text-center no-margin">TEFL-Planr</h1>
-			<p id="slogan-text">Bacon ipsum dolor amet shank andouille sirloin, strip steak boudin shankle ham short ribs cow leberkas beef ball tip frankfurter. Spare ribs biltong flank bacon meatloaf ribeye sausage short loin venison tail burgdoggen leberkas brisket kielbasa. Pork belly venison tongue frankfurter kevin chuck swine. Corned beef swine boudin, kielbasa ham venison ham hock bresaola strip steak filet mignon pancetta cow kevin burgdoggen.</p>
+			<p id="slogan-text">Bacon ipsum dolor amet shank andouille sirloin, strip steak boudin shankle ham short ribs cow leberkas beef ball tip frankfurter.
+				<br/><br/> Pork belly venison tongue frankfurter kevin chuck swine.
+			</p>
+			<md-button hide-gt-sm ng-click="Login.scroll()" class="md-raised md-primary">Get Started</md-button>
 		</div>
 	</div>
-	<div flex class="full-height-container">
+
+	<div id="login-div" flex class="full-height-container">
+		<div layout="column" layout-align="center center">
+			<h1>Some Title</h1>
+			<p>Maybe some text, too?</p>
+		</div>
 		<div class="centered-box">
-			<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+			<md-tabs md-selected="Login.selectedTab" md-dynamic-height md-border-bottom md-stretch-tabs="always">
 				<md-tab label="login">
 					</br>
 					<form name="loginForm" ng-submit="Login.login()">
@@ -29,7 +37,10 @@
 								</div>
 							</md-input-container>
 						</div>
-						<md-button type="submit" class="md-raised md-primary">Login</md-button>
+						<div layout="column" layout-align="start center">
+							<md-button type="submit" class="md-raised md-primary">Login</md-button>
+							<a ng-click="Login.selectedTab = 1" id="no-account" href="">Don't have an account?</a>
+						</div>
 					</form>
 				</md-tab>
 				<md-tab label="signup">
@@ -43,8 +54,6 @@
 									<div ng-show="signupForm.firstName.$invalid" ng-message="required">This is required.</div>
 								</div>
 							</md-input-container>
-						</div>
-						<div layout="row">
 							<md-input-container flex="100">
 								<label>Last Name</label>
 								<input required name="lastName" ng-model="Login.user.lastName">
@@ -52,8 +61,8 @@
 									<div ng-show="signupForm.lastName.$invalid" ng-message="required">This is required.</div>
 								</div>
 							</md-input-container>
-						</div>
 
+						</div>
 						<div layout="row">
 							<md-input-container flex="100">
 								<label>Email</label>
@@ -80,8 +89,6 @@
 									<div ng-show="signupForm.password.$invalid" ng-message="required">This is required.</div>
 								</div>
 							</md-input-container>
-						</div>
-						<div layout="row">
 							<md-input-container flex="100">
 								<label>Confirm Password</label>
 								<input required type="password" name="confirmPassword" ng-model="Login.user.confirmPassword">
@@ -89,8 +96,11 @@
 									<div ng-show="signupForm.confirmPassword.$invalid" ng-message="required">This is required.</div>
 								</div>
 							</md-input-container>
+
 						</div>
-						<md-button type="submit" class="md-raised md-primary">signup</md-button>
+						<div layout="column" layout-align="start center">
+							<md-button type="submit" class="md-raised md-primary">signup</md-button>
+						</div>
 					</form>
 				</md-tab>
 			</md-tabs>

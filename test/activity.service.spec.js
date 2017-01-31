@@ -21,7 +21,7 @@ describe('activityService', function () {
     describe('createActivity function', function () {
         it('should return data on success', function () {
             $httpBackend.whenPOST(serverUrl + '/activity').respond(200, exampleData);
-            userService.createActivity(exampleData).then(function (res) {
+            activityService.createActivity(exampleData).then(function (res) {
                 expect(res).toEqual(exampleData);
             });
             $httpBackend.flush();
@@ -31,7 +31,7 @@ describe('activityService', function () {
     describe('getActivities function', function () {
         it('should return data on success', function () {
             $httpBackend.whenGET(serverUrl + '/activity').respond(200, [exampleData]);
-            userService.getActivities().then(function (res) {
+            activityService.getActivities().then(function (res) {
                 expect(res).toEqual([exampleData]);
             });
             $httpBackend.flush();
@@ -41,7 +41,27 @@ describe('activityService', function () {
     describe('getActivity function', function () {
         it('should return data on success', function () {
             $httpBackend.whenGET(serverUrl + '/activity/abc123').respond(200, exampleData);
-            userService.getActivities(exampleData._id).then(function (res) {
+            activityService.getActivity(exampleData._id).then(function (res) {
+                expect(res).toEqual(exampleData);
+            });
+            $httpBackend.flush();
+        });
+    });
+
+    describe('updateActivity function', function () {
+        it('should return data on success', function () {
+            $httpBackend.whenPUT(serverUrl + '/activity/abc123').respond(200, exampleData);
+            activityService.updateActivity(exampleData).then(function (res) {
+                expect(res).toEqual(exampleData);
+            });
+            $httpBackend.flush();
+        });
+    });
+
+    describe('deleteActivity function', function () {
+        it('should return data on success', function () {
+            $httpBackend.whenDELETE(serverUrl + '/activity/abc123').respond(200, exampleData);
+            activityService.deleteActivity(exampleData._id).then(function (res) {
                 expect(res).toEqual(exampleData);
             });
             $httpBackend.flush();

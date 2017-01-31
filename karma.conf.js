@@ -25,8 +25,10 @@ module.exports = function (config) {
       './node_modules/angular-material/angular-material.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './app/app.module.js',
-      './app/components/login/login.module.js',
-      './app/components/login/login.controller.js',
+      './app/components/**/*.module.js',
+      './app/components/**/*.controller.js',
+      './app/shared/*.service.js',
+      './app/shared/*.constant.js',
       'test/mocks/*.mock.js',
       'test/**/*.spec.js'
     ],

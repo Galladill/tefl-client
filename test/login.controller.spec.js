@@ -4,9 +4,10 @@ describe('Login Controller', function() {
 	beforeEach(module('app'));
 
 	// Inject dependencies and mock services here
-	var $controller, LoginCtrl, authServiceMock, userServiceMock, $location, $mdToast;
-	beforeEach(inject(function($controller, _authServiceMock_, _userServiceMock_, _$location_, _$mdToast_){
+	var $controller, LoginCtrl, authServiceMock, userServiceMock, $location, $mdToast, $rootScope;
+	beforeEach(inject(function($controller, _authServiceMock_, _userServiceMock_, _$location_, _$mdToast_, _$rootScope_){
 		authServiceMock = _authServiceMock_;
+		$rootScope = _$rootScope_;
 		userServiceMock = _userServiceMock_;
 		$location = _$location_;
 		$mdToast = _$mdToast_;
@@ -42,7 +43,8 @@ describe('Login Controller', function() {
 			expect(LoginCtrl.user.lastName).toEqual(undefined);
 			expect(LoginCtrl.user.confirmPassword).toEqual(undefined);
 			expect(LoginCtrl.user.confirmEmail).toEqual(undefined);
-			expect($location.path()).toBe('');
+			$rootScope.$apply();
+			expect($location.path()).toBe('/');
 		});
 	});
 
@@ -52,6 +54,7 @@ describe('Login Controller', function() {
 			LoginCtrl.signup();
 			expect(LoginCtrl.user.confirmPassword).toEqual(undefined);
 			expect(LoginCtrl.user.confirmEmail).toEqual(undefined);
+			$rootScope.$apply();
 			expect($location.path()).toBe('');
 		});
 		it('should show an error message on unmatched password', function(){

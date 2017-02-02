@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('app', ['ngStorage', 'ngMaterial', 'login']);
+    var app = angular.module('app', ['ngStorage', 'ngMaterial', 'login', 'lesson']);
 
     app.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
         $httpProvider.interceptors.push(function () {

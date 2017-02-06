@@ -3,11 +3,11 @@
 
 	angular
 		.module('lesson')
-		.controller('LessonController', LessonController);
+		.controller('LibraryController', LibraryController);
 
-	LessonController.$inject = [];
+	LibraryController.$inject = [];
 
-	function LessonController() {
+	function LibraryController() {
 		// Attach functions to the controller here.
 		var vm = this;
 

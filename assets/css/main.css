@@ -50,3 +50,8 @@
     font-size: .8em;
     text-decoration: none;
 }
+
+#lesson-container {
+    margin-left: 10%;
+    margin-right: 10%;
+}

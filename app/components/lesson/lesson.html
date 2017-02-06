@@ -11,28 +11,24 @@
 
     <div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
         <form name="lessonForm" ng-submit="Lesson.save()">
-            <div layout="column" layout-align="center center">
+            <div layout="column">
                 <h1 class="md-display-1">Lesson</h1>
                 <md-input-container>
-                    <label>Lesson Title</label>
+                    <label>Title</label>
                     <input required type="text" name="title" ng-model="Lesson.lesson.title">
                     <div ng-messages="lessonForm.title.$error">
                         <div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
                     </div>
                 </md-input-container>
-                <h5 class="md-display-5">Student Goals</h5>
-                <div flex ng-repeat="(idx, studentGoal) in Lesson.lesson.studentGoals"> 
-                    <md-input-container class="no-margin" md-no-float>
-                        <input ng-model="Lesson.lesson.studentGoals[idx]" placeholder="Student Goal {{idx + 1}}">
-                    </md-input-container>
-                    <md-button ng-if="idx == Lesson.lesson.studentGoals.length - 1"  class="md-icon-button md-accent" aria-label="Favorite">+</md-button>
+                <div layout="row">
+                    <h5 class="md-body-1">Student Goals</h5>
+                    <md-button ng-click="Lesson.addGoal(Lesson.studentGoals)" ng-if="Lesson.studentGoals.length < 3" class="md-primary">Add</md-button>
                 </div>
-                <h5 class="md-display-5">Teacher Goals</h5>
-                <div flex ng-repeat="(idx, teacherGoal) in Lesson.lesson.teacherGoals"> 
+                <div ng-repeat="(idx, studentGoal) in Lesson.studentGoals"> 
                     <md-input-container class="no-margin" md-no-float>
-                        <input ng-model="Lesson.lesson.teacherGoals[idx]" placeholder="Teacher Goal {{idx + 1}}">
+                        <input ng-model="Lesson.studentGoals[idx]" placeholder="Student Goal {{idx + 1}}">
                     </md-input-container>
-                    <md-button ng-if="idx == Lesson.lesson.teacherGoals.length - 1"  class="md-icon-button md-accent" aria-label="Favorite">+</md-button>
+                    <md-button ng-click="Lesson.deleteGoal(Lesson.studentGoals, idx)" ng-hide="Lesson.studentGoals.length == 1" class="md-warn" >Del</md-button>
                 </div>
                 <h4>Duration: {{Lesson.lesson.duration}}m</h4>
             </div>

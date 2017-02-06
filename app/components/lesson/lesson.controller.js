@@ -10,9 +10,11 @@
 	function LessonController() {
 		// Attach functions to the controller here.
 		var vm = this;
+		vm.addGoal = _addGoal;
+		vm.deleteGoal = _deleteGoal;
 		vm.lesson = {};
-		vm.lesson.studentGoals = ['test', 'ay'];
-		vm.lesson.teacherGoals = ['test', 'ay'];
+		vm.studentGoals = ['test'];
+		vm.teacherGoals = ['test', 'ay'];
 		vm.lesson.duration = 40;
 		// Any logic that needs to run when the controller loads should be placed here.
 		var activityPane = angular.element('#activityPane');
@@ -26,13 +28,20 @@
 		});
 
 		// Define functions here.
+		function _addGoal(goalList) {
+			goalList.push('');
+		}
+
+		function _deleteGoal(goalList, idx) {
+			goalList.splice(idx, 1);
+		}
+
 		function respShowContent() {
 			if (window.innerWidth > 959) {
 				activityPane.slideDown();
 			} else {
 				activityPane.slideUp();
 			}
-
 		}
 	}
 })();

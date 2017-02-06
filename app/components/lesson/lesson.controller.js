@@ -4,7 +4,7 @@
 	angular
 		.module('lesson')
 		.controller('LessonController', LessonController);
-
+	console.log('poop');
 	LessonController.$inject = [];
 
 	function LessonController() {

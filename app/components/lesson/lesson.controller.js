@@ -13,7 +13,7 @@
 		vm.addGoal = _addGoal;
 		vm.deleteGoal = _deleteGoal;
 		vm.lesson = {};
-		vm.studentGoals = ['test'];
+		vm.studentGoals = [{goal: 'testeroni'}];
 		vm.teacherGoals = ['test', 'ay'];
 		vm.lesson.duration = 40;
 		// Any logic that needs to run when the controller loads should be placed here.
@@ -29,7 +29,7 @@
 
 		// Define functions here.
 		function _addGoal(goalList) {
-			goalList.push('');
+			goalList.push({goal: ''});
 		}
 
 		function _deleteGoal(goalList, idx) {

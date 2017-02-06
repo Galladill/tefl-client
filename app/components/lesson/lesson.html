@@ -1,13 +1,41 @@
-<div>
-    <div id="filterContent">
-        <div id="login-background" layout="column" layout-align="start center">
-            <p>blahh</p>
-		</div>
+<div layout-sm="column" layout-gt-sm="row">
+    <div style="background-color: red" flex-sm="100" flex-gt-sm="30" id="activityPane">
+        <!-- LIBRARY DIRECTIVE HERE -->
+        <div layout="column" layout-align="start center">
+            <h1 class="md-display-1">Activities</h1>
+        </div>
     </div>
-    {{Login}}
-    
-    <div id="filterButton" style="text-align: center;cursor:pointer" hide-gt-xs show-xs>
-        <p style="margin:0;">Filter Results</p>
-        <i class="fa fa-sort-desc fa-5" aria-hidden="true"></i>
+    <div id="activityButton" hide-gt-sm show-sm>
+        <p>Open</p>
+    </div>
+
+    <div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
+        <form name="lessonForm" ng-submit="Lesson.save()">
+            <div layout="column" layout-align="center center">
+                <h1 class="md-display-1">Lesson</h1>
+                <md-input-container>
+                    <label>Lesson Title</label>
+                    <input required type="text" name="title" ng-model="Lesson.lesson.title">
+                    <div ng-messages="lessonForm.title.$error">
+                        <div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                <h5 class="md-display-5">Student Goals</h5>
+                <div flex ng-repeat="(idx, studentGoal) in Lesson.lesson.studentGoals"> 
+                    <md-input-container class="no-margin" md-no-float>
+                        <input ng-model="Lesson.lesson.studentGoals[idx]" placeholder="Student Goal {{idx + 1}}">
+                    </md-input-container>
+                    <md-button ng-if="idx == Lesson.lesson.studentGoals.length - 1"  class="md-icon-button md-accent" aria-label="Favorite">+</md-button>
+                </div>
+                <h5 class="md-display-5">Teacher Goals</h5>
+                <div flex ng-repeat="(idx, teacherGoal) in Lesson.lesson.teacherGoals"> 
+                    <md-input-container class="no-margin" md-no-float>
+                        <input ng-model="Lesson.lesson.teacherGoals[idx]" placeholder="Teacher Goal {{idx + 1}}">
+                    </md-input-container>
+                    <md-button ng-if="idx == Lesson.lesson.teacherGoals.length - 1"  class="md-icon-button md-accent" aria-label="Favorite">+</md-button>
+                </div>
+                <h4>Duration: {{Lesson.lesson.duration}}m</h4>
+            </div>
+        </form>
     </div>
 </div>

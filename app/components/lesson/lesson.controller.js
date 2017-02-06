@@ -9,29 +9,30 @@
 
 	function LessonController() {
 		// Attach functions to the controller here.
-		console.log('waaaat');
 		var vm = this;
-
+		vm.lesson = {};
+		vm.lesson.studentGoals = ['test', 'ay'];
+		vm.lesson.teacherGoals = ['test', 'ay'];
+		vm.lesson.duration = 40;
 		// Any logic that needs to run when the controller loads should be placed here.
-		var content = angular.element('#filterContent');
-		var filterButton = angular.element('#filterButton');
+		var activityPane = angular.element('#activityPane');
+		var activityButton = angular.element('#activityButton');
 		respShowContent();
 		$(window).on("resize", function () {
 			respShowContent();
 		});
-		filterButton.on('click', function () {
-			content.slideToggle();
+		activityButton.on('click', function () {
+			activityPane.slideToggle();
 		});
 
-
+		// Define functions here.
 		function respShowContent() {
-			if (window.innerWidth > 599) {
-				content.slideDown();
+			if (window.innerWidth > 959) {
+				activityPane.slideDown();
 			} else {
-				content.slideUp();
+				activityPane.slideUp();
 			}
 
 		}
-		// Define functions here.
 	}
 })();

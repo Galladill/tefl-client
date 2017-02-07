@@ -4,9 +4,9 @@
 	angular
 		.module('lesson')
 		.controller('LessonController', LessonController);
-	LessonController.$inject = ['$mdSidenav', 'lessonService'];
+	LessonController.$inject = ['$mdSidenav', 'lessonService', 'activityService'];
 
-	function LessonController($mdSidenav, lessonService) {
+	function LessonController($mdSidenav, lessonService, activityService) {
 		// Attach functions to the controller here.
 		var vm = this;
 		vm.addGoal = _addGoal;
@@ -14,31 +14,33 @@
 		vm.openSideNav = _openSideNav;
 
 		// Any logic that needs to run when the controller loads should be placed here.
-		lessonService.getLesson('589a2b55ae59620ac700793e').then(function(lesson, err){
+		lessonService.getLesson('589a2b55ae59620ac700793e').then(function (lesson, err) {
 			vm.lesson = lesson;
-			
+
 			// ng-repeat does not like arrays of strings, so create obects instead!
-			angular.forEach(lesson.studentGoals, function(val, idx) {
-				vm.studentGoals.push({goal: val});
+			angular.forEach(lesson.studentGoals, function (val, idx) {
+				vm.studentGoals.push({ goal: val });
 			});
 			if (!vm.studentGoals) {
 				vm.studentGoals = [];
-				vm.studentGoals.push({goal: ''});
+				vm.studentGoals.push({ goal: '' });
 			}
-			angular.forEach(lesson.teacherGoals, function(val, idx) {
-				vm.teacherGoals.push({goal: val});
+			angular.forEach(lesson.teacherGoals, function (val, idx) {
+				vm.teacherGoals.push({ goal: val });
 			});
 			if (!vm.teacherGoals) {
 				vm.teacherGoals = [];
-				vm.teacherGoals.push({goal: ''});
+				vm.teacherGoals.push({ goal: '' });
 			}
-			
+		});
 
+		activityService.getActivities().then(function (activities, err) {
+			console.log(activities, err);
 		});
 
 		// Define functions here.
 		function _addGoal(goalList) {
-			goalList.push({goal: ''});
+			goalList.push({ goal: '' });
 		}
 
 		function _deleteGoal(goalList, idx) {

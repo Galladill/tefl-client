@@ -14,7 +14,7 @@
                             var userId = JSON.parse(window.localStorage['ngStorage-tefl'])._id;
                             if (accessToken != null) {
                                 config.headers['Authorization'] = 'Bearer ' + accessToken;
-                                config.headers['user_id'] = 'Bearer ' + accessToken;
+                                config.headers['user_id'] = userId;
                             }
                         }
                     }

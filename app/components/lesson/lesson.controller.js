@@ -4,7 +4,6 @@
 	angular
 		.module('lesson')
 		.controller('LessonController', LessonController);
-	console.log('poop');
 	LessonController.$inject = [];
 
 	function LessonController() {
@@ -14,7 +13,7 @@
 		vm.deleteGoal = _deleteGoal;
 		vm.lesson = {};
 		vm.studentGoals = [{goal: 'testeroni'}];
-		vm.teacherGoals = ['test', 'ay'];
+		vm.teacherGoals = [{goal: 'fgxhrfgsdf'}];
 		vm.lesson.duration = 40;
 		// Any logic that needs to run when the controller loads should be placed here.
 		var activityPane = angular.element('#activityPane');

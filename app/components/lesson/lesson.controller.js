@@ -4,26 +4,36 @@
 	angular
 		.module('lesson')
 		.controller('LessonController', LessonController);
-	LessonController.$inject = [];
+	LessonController.$inject = ['$mdSidenav', 'lessonService'];
 
-	function LessonController() {
+	function LessonController($mdSidenav, lessonService) {
 		// Attach functions to the controller here.
 		var vm = this;
 		vm.addGoal = _addGoal;
 		vm.deleteGoal = _deleteGoal;
-		vm.lesson = {};
-		vm.studentGoals = [{goal: 'testeroni'}];
-		vm.teacherGoals = [{goal: 'fgxhrfgsdf'}];
-		vm.lesson.duration = 40;
+		vm.openSideNav = _openSideNav;
+
 		// Any logic that needs to run when the controller loads should be placed here.
-		var activityPane = angular.element('#activityPane');
-		var activityButton = angular.element('#activityButton');
-		respShowContent();
-		$(window).on("resize", function () {
-			respShowContent();
-		});
-		activityButton.on('click', function () {
-			activityPane.slideToggle();
+		lessonService.getLesson('589a2b55ae59620ac700793e').then(function(lesson, err){
+			vm.lesson = lesson;
+			
+			// ng-repeat does not like arrays of strings, so create obects instead!
+			angular.forEach(lesson.studentGoals, function(val, idx) {
+				vm.studentGoals.push({goal: val});
+			});
+			if (!vm.studentGoals) {
+				vm.studentGoals = [];
+				vm.studentGoals.push({goal: ''});
+			}
+			angular.forEach(lesson.teacherGoals, function(val, idx) {
+				vm.teacherGoals.push({goal: val});
+			});
+			if (!vm.teacherGoals) {
+				vm.teacherGoals = [];
+				vm.teacherGoals.push({goal: ''});
+			}
+			
+
 		});
 
 		// Define functions here.
@@ -35,12 +45,9 @@
 			goalList.splice(idx, 1);
 		}
 
-		function respShowContent() {
-			if (window.innerWidth > 959) {
-				activityPane.slideDown();
-			} else {
-				activityPane.slideUp();
-			}
+		function _openSideNav() {
+			$mdSidenav('left').toggle();
 		}
+
 	}
 })();

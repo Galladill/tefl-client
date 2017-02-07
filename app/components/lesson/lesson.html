@@ -1,25 +1,14 @@
 <div layout-sm="column" layout-gt-sm="row">
     <div style="background-color: lightblue" flex-sm="100" flex-gt-sm="30" id="activityPane">
-        <!-- LIBRARY DIRECTIVE HERE -->
-        <div layout="column" layout-align="start center">
-            <h1 class="md-display-1">Activities</h1>
-        </div>
-    </div>
-    <div id="activityButton" hide-gt-sm show-sm>
-        <p>Open</p>
-    </div>
-
-    <div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
-        <form name="lessonForm" ng-submit="Lesson.save()">
             <div layout="column" layout-align="start center">
-                <h1 class="md-display-1">Lesson</h1>
                 <md-input-container style="width: 80%">
-                    <label>Title</label>
+                    <label>Lesson Title</label>
                     <input required type="text" name="title" ng-model="Lesson.lesson.title">
                     <div ng-messages="lessonForm.title.$error">
                         <div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
                     </div>
                 </md-input-container>
+                <h4 class="text-center">Duration: {{Lesson.lesson.duration}}m</h4>
             </div>
             <div layout-sm="column" layout-align-sm="start center" layout-padding>
                     <h4>Student Goals</h4>
@@ -39,7 +28,18 @@
                     </div>
                     <md-button ng-click="Lesson.addGoal(Lesson.teacherGoals)" ng-if="Lesson.teacherGoals.length < 3" class=" md-primary">Add Teacher Goal</md-button>
             </div>
-            <h4 class="text-center">Duration: {{Lesson.lesson.duration}}m</h4>
+    </div>
+
+    <div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
+        <form name="lessonForm" ng-submit="Lesson.save()">
+        <md-button ng-click="Lesson.openSideNav()">
+            <p>Open</p>
+        </md-button>
+
         </form>
     </div>
 </div>
+
+<md-sidenav md-component-id="left" class="md-sidenav-left">
+    <h1>Activity Library</h1>
+</md-sidenav>

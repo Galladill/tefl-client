@@ -35,7 +35,7 @@
 		});
 
 		activityService.getActivities().then(function (activities, err) {
-			console.log(activities, err);
+			vm.activities = activities;
 		});
 
 		// Define functions here.

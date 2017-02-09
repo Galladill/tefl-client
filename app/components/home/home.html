@@ -1,6 +1,49 @@
 <md-toolbar layout="row" class="md-toolbar-tools">
-    <md-button class="menu md-icon-button" hide-gt-sm ng-click="" aria-label="Menu">
-      <md-icon md-svg-icon="menu"></md-icon>
-    </md-button>
-    <h1>My Lessons</h1>
-  </md-toolbar>
+        <md-button class="md-icon-button" aria-label="Settings">
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+        <p>
+          <span>Logo</span>
+        </p>
+</md-toolbar>
+        
+<div layout="row" layout-xs="row">
+  <div class="banner">
+   <p id="home_banner_title">Some Banner Text</p>
+  </div>
+</div>
+
+<div layout="row" layout-xs="row">
+  
+    <h1 class="md-title">{{user.firstName}}'s Lessons</h1>
+
+    <!-- sort lessons option -->
+
+    <md-input-container>
+     <label>Sort</label>
+        <md-select ng-model="sort">
+          <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
+        </md-select>
+  </md-input-container>
+  
+
+  <!-- ng-repeat logged-in user's lessons-->
+
+
+
+
+
+<md-button class="md-fab md-fab-bottom-right docs-scroll-fab"
+                 docs-scroll-class="scrolling"
+                 ng-click=""
+                 aria-label="Create Lesson">
+        <md-tooltip md-direction="top">Create Lesson</md-tooltip>
+        <md-icon md-svg-src="images/icons/ic_create_black_24px.svg"></md-icon>
+      </md-button>
+
+</div>
+
+
+
+  
+

@@ -24,7 +24,7 @@
 			delete vm.user.lastName;
 
 			authService.login(vm.user.email, vm.user.password).then(function (res) {
-				$location.path('');
+				$location.path('/home');
 			});
 		}
 

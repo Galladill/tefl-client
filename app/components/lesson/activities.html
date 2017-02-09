@@ -1,3 +1,7 @@
 <md-sidenav md-component-id="left" class="md-sidenav-left">
     <h1>My Activities</h1>
+    <div ng-repeat="activity in Lesson.allActivities">
+        {{activity.title}}
+        <md-button ng-click="Lesson.addActivity(activity._id)" class="md-primary" ng-if="Lesson.lesson._activity.indexOf(activity._id) < 0">Add</md-button>
+    </div>
 </md-sidenav>

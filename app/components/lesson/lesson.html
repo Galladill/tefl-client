@@ -1,5 +1,5 @@
 <div layout-sm="column" layout-gt-sm="row">
-    <div style="background-color: lightblue" flex-sm="100" flex-gt-sm="30" id="activityPane">
+    <div class="full-cover-bg journal-bg" flex-sm="100" flex-gt-sm="30">
         <div layout="column" layout-align="start center">
             <md-input-container style="width: 80%">
                 <label>Lesson Title</label>
@@ -33,8 +33,13 @@
     <div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
         <div layout="row">
             <md-button class="md-primary" ng-click="Lesson.openSideNav()">My Activities</md-button>
-            <md-button class="md-primary">Create Activity</md-button>
-            <md-button class="md-primary md-raised">Save Lesson</md-button>
+            <md-button class="md-primary" ng-click="Lesson.openDialog($event)">Create Activity</md-button>
+            <md-button class="md-primary md-raised" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
+        </div>
+        <div ng-repeat="activity in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0" >
+            {{activity.title}}
+            <md-button ng-click="Lesson.removeActivity(activity._id)" class="md-warn">Remove</md-button>
+
         </div>
     </div>
 </div>

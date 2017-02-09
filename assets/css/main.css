@@ -96,3 +96,7 @@
   padding-right: 25%;
   text-align: center;
 }
+
+md-icon {
+  color: white !important;
+}

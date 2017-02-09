@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('app', ['ngStorage', 'ngMaterial', 'login', 'lesson', 'home']);
 
-    app.config(['$httpProvider', '$routeProvider', '$mdThemingProvider', function ($httpProvider, $routeProvider, $mdThemingProvider) {
+    app.config(['$httpProvider', '$routeProvider', '$mdThemingProvider', '$mdIconProvider', function ($httpProvider, $routeProvider, $mdThemingProvider, $mdIconProvider) {
         $httpProvider.interceptors.push(function () {
             var SERVER = 'http://54.202.243.31:9001';
             return {
@@ -29,6 +29,7 @@
 
         $routeProvider.otherwise('/');
 
+        // Configure theme
         $mdThemingProvider.alwaysWatchTheme(true);
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')

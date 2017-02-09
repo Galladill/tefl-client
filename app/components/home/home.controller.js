@@ -5,9 +5,9 @@
         .module('home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = [''];
+    // HomeController.$inject = [];
 
-    function HomeController(authService, userService, $location, $mdToast) {
+    function HomeController() {
         // Attach functions to the controller here.
 		var vm = this;
         

@@ -74,6 +74,7 @@
 
 .banner {
   height: 200px;
+  width: 100%;
   margin-top: -50px;
   background: url(../images/writing_background.jpg);
   -webkit-background-size: cover;

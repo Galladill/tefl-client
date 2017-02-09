@@ -38,7 +38,7 @@
         </div>
         <div ng-repeat="activity in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0" >
             {{activity.title}}
-            <md-button ng-click="Lesson.removeActivity(activity._id)" class="md-warn">Remove</md-button>
+            <md-button ng-click="Lesson.removeActivity(activity)" class="md-warn">Remove</md-button>
 
         </div>
     </div>

@@ -4,9 +4,9 @@
 	angular
 		.module('lesson')
 		.controller('LessonController', LessonController);
-	LessonController.$inject = ['$mdSidenav', '$mdDialog', 'lessonService', 'activityService'];
+	LessonController.$inject = ['$mdSidenav', '$mdDialog', 'lessonService', 'activityService', '$q'];
 
-	function LessonController($mdSidenav, $mdDialog, lessonService, activityService) {
+	function LessonController($mdSidenav, $mdDialog, lessonService, activityService, $q) {
 		// Attach functions to the controller here.
 		var vm = this;
 		vm.addGoal = _addGoal;
@@ -18,20 +18,26 @@
 		vm.saveLesson = _saveLesson;
 
 		// Any logic that needs to run when the controller loads should be placed here.
-		lessonService.getLesson('589a2b55ae59620ac700793e').then(function (lesson, err) {
-			vm.lesson = lesson;
-			console.log('lesson', lesson);
-
+		$q.all({
+			lesson: lessonService.getLesson('589a2b55ae59620ac700793e'),
+			activities: activityService.getActivities()
+		}).then(function (response, err) {
+			vm.allActivities = response.activities;
+			vm.lesson = response.lesson;
+		
+			console.log('allActivities', vm.allActivities);
+			console.log('lesson', vm.lesson);
+			vm.lesson.duration = getTotalDuration();
 			// ng-repeat does not like arrays of strings, so create obects instead!
 			vm.studentGoals = [];
 			vm.teacherGoals = [];
-			angular.forEach(lesson.studentGoals, function (val, idx) {
+			angular.forEach(vm.lesson.studentGoals, function (val, idx) {
 				vm.studentGoals.push({ goal: val });
 			});
 			if (vm.studentGoals.length == 0) {
 				vm.studentGoals.push({ goal: '' });
 			}
-			angular.forEach(lesson.teacherGoals, function (val, idx) {
+			angular.forEach(vm.lesson.teacherGoals, function (val, idx) {
 				vm.teacherGoals.push({ goal: val });
 			});
 			if (vm.teacherGoals.length == 0) {
@@ -39,10 +45,6 @@
 			}
 		});
 
-		activityService.getActivities().then(function (activities, err) {
-			vm.allActivities = activities;
-			console.log('allActivities', vm.allActivities);
-		});
 
 		// Define functions here.
 		function _addGoal(goalList) {
@@ -72,13 +74,15 @@
 				});
 		}
 
-		function _removeActivity(id) {
-			var index = vm.lesson._activity.indexOf(id);
+		function _removeActivity(activity) {
+			var index = vm.lesson._activity.indexOf(activity._id);
 			vm.lesson._activity.splice(index, 1);
+			vm.lesson.duration -= activity.duration;
 		}
 
-		function _addActivity(id) {
-			vm.lesson._activity.push(id);
+		function _addActivity(activity) {
+			vm.lesson._activity.push(activity._id);
+			vm.lesson.duration += activity.duration;
 		}
 
 		function _saveLesson() {
@@ -96,6 +100,18 @@
 			lessonService.updateLesson(vm.lesson).then(function (lesson, err) {
 				console.log('lesson saved', lesson);
 			});
+		}
+		
+		function getTotalDuration() {
+			var total = 0;
+			var index;
+			angular.forEach(vm.allActivities, function(activity, idx) {
+				index = vm.lesson._activity.indexOf(activity._id);
+				if(index >= 0) {
+					total += vm.allActivities[idx].duration;
+				}
+			});
+			return total;
 		}
 	}
 })();

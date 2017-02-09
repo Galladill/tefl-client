@@ -1,0 +1,18 @@
+<md-sidenav md-component-id="left" class="md-sidenav-left">
+    <h1>My Activities</h1>
+    <div ng-repeat="activity in Lesson.allActivities">
+        {{activity.title}}
+        <md-button ng-click="Lesson.addActivity(activity)" class="md-primary" ng-if="Lesson.lesson._activity.indexOf(activity._id) < 0">Add</md-button>
+        <md-menu>
+          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+            =
+          </md-button>
+          <md-menu-content width="2">
+            <md-menu-item ng-repeat="item in [1, 2, 3]">
+              <md-button ng-click="ctrl.announceClick($index)"> <span md-menu-align-target>Option</span> {{item}} </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+    </div>
+</md-sidenav>

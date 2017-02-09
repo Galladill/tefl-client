@@ -3,8 +3,8 @@
     
     loginModule.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl : 'app/components/login/login.html',
-            controller : 'LoginController',
+            templateUrl: 'app/components/login/login.html',
+            controller: 'LoginController',
             controllerAs: 'Login'
         });
     }]); 

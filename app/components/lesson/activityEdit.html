@@ -1,0 +1,10 @@
+<input ng-model="Lesson.currentActivity.title">
+<input ng-model="Lesson.currentActivity.duration">
+        <md-select ng-model="Lesson.currentActivity.level" placeholder="Level" class="md-no-underline">
+          <md-option value="Any">Any</md-option>
+          <md-option value="Elementary">Elementary</md-option>
+          <md-option value="Intermediate">Intermediate</md-option>
+          <md-option value="Advanced">Advanced</md-option>
+        </md-select>
+
+<md-button class="md-primary" ng-click="Lesson.saveActivity(Lesson.currentActivity)">Save</md-button>

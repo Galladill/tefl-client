@@ -1,46 +1,46 @@
 <div layout-sm="column" layout-gt-sm="row">
-    <div class="full-cover-bg journal-bg" flex-sm="100" flex-gt-sm="30">
-        <div layout="column" layout-align="start center">
-            <md-input-container style="width: 80%">
-                <label>Lesson Title</label>
-                <input required type="text" name="title" ng-model="Lesson.lesson.title">
-                <div ng-messages="lessonForm.title.$error">
-                    <div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
-                </div>
-            </md-input-container>
-            <h4 class="text-center">Duration: {{Lesson.lesson.duration}}m</h4>
-        </div>
-        <div layout-sm="column" layout-align-sm="start center" layout-padding>
-                <h4>Student Goals</h4>
-                <div ng-repeat="(idx, studentGoal) in Lesson.studentGoals"> 
-                    <md-input-container style="width: 65%" class="no-margin no-error-spacer goal-input" md-no-float>
-                        <input md-no-float class="md-block" ng-model="Lesson.studentGoals[idx].goal" placeholder="Student Goal {{idx + 1}}">
-                    </md-input-container>
-                    <md-button ng-click="Lesson.deleteGoal(Lesson.studentGoals, idx)" ng-disabled="Lesson.studentGoals.length == 1" class="md-warn" >Del</md-button>
-                </div>
-                <md-button ng-click="Lesson.addGoal(Lesson.studentGoals)" ng-if="Lesson.studentGoals.length < 3" class=" md-primary">Add Student Goal</md-button>
-                <h4>Teacher Goals</h4>
-                <div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals"> 
-                    <md-input-container style="width: 65%" class="no-margin no-error-spacer goal-input" md-no-float>
-                        <input ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
-                    </md-input-container>
-                    <md-button ng-click="Lesson.deleteGoal(Lesson.teacherGoals, idx)" ng-disabled="Lesson.teacherGoals.length == 1" class="md-warn" >Del</md-button>
-                </div>
-                <md-button ng-click="Lesson.addGoal(Lesson.teacherGoals)" ng-if="Lesson.teacherGoals.length < 3" class=" md-primary">Add Teacher Goal</md-button>
-        </div>
-    </div>
+	<div class="full-cover-bg journal-bg" flex-sm="100" flex-gt-sm="30">
+		<div layout="column" layout-align="start center">
+			<md-input-container style="width: 80%">
+				<label>Lesson Title</label>
+				<input required type="text" name="title" ng-model="Lesson.lesson.title">
+				<div ng-messages="lessonForm.title.$error">
+					<div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
+				</div>
+			</md-input-container>
+			<h4 class="text-center">Duration: {{Lesson.lesson.duration}}m</h4>
+		</div>
+		<div layout-sm="column" layout-align-sm="start center" layout-padding>
+			<h4>Student Goals</h4>
+			<div ng-repeat="(idx, studentGoal) in Lesson.studentGoals">
+				<md-input-container style="width: 65%" class="no-margin no-error-spacer goal-input" md-no-float>
+					<input md-no-float class="md-block" ng-model="Lesson.studentGoals[idx].goal" placeholder="Student Goal {{idx + 1}}">
+				</md-input-container>
+				<md-button ng-click="Lesson.deleteGoal(Lesson.studentGoals, idx)" ng-disabled="Lesson.studentGoals.length == 1" class="md-warn">Del</md-button>
+			</div>
+			<md-button ng-click="Lesson.addGoal(Lesson.studentGoals)" ng-if="Lesson.studentGoals.length < 3" class=" md-primary">Add Student Goal</md-button>
+			<h4>Teacher Goals</h4>
+			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals">
+				<md-input-container style="width: 65%" class="no-margin no-error-spacer goal-input" md-no-float>
+					<input ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
+				</md-input-container>
+				<md-button ng-click="Lesson.deleteGoal(Lesson.teacherGoals, idx)" ng-disabled="Lesson.teacherGoals.length == 1" class="md-warn">Del</md-button>
+			</div>
+			<md-button ng-click="Lesson.addGoal(Lesson.teacherGoals)" ng-if="Lesson.teacherGoals.length < 3" class=" md-primary">Add Teacher Goal</md-button>
+		</div>
+	</div>
 
-    <div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
-        <div layout="row">
-            <md-button class="md-primary" ng-click="Lesson.openSideNav()">My Activities</md-button>
-            <md-button class="md-primary" ng-click="Lesson.openDialog($event)">Create Activity</md-button>
-            <md-button class="md-primary md-raised" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
-        </div>
-        <div ng-repeat="activity in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0" >
-            {{activity.title}}
-            <md-button ng-click="Lesson.removeActivity(activity)" class="md-warn">Remove</md-button>
+	<div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
+		<div layout="row">
+			<md-button class="md-primary" ng-click="Lesson.openSideNav()">My Activities</md-button>
+			<md-button class="md-primary" ng-click="Lesson.editActivity($event)">Create Activity</md-button>
+			<md-button class="md-primary md-raised" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
+		</div>
+		<div ng-repeat="activity in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0">
+			{{activity.title}}
+			<md-button ng-click="Lesson.removeActivity(activity)" class="md-warn">Remove</md-button>
 
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 <ng-include src="'app/components/lesson/activities.html'"></ng-include>

@@ -1,48 +1,43 @@
 <md-toolbar layout="row" class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings">
-        </md-button>
-        <p>
-          <span>Logo</span>
-        </p>
+  <md-button class="md-icon-button" aria-label="Settings">
+  </md-button>
+  <p>
+    <span>Logo</span>
+  </p>
 </md-toolbar>
-        
+
 <div layout="row" layout-xs="row">
   <div class="banner">
-   <p id="home_banner_title">Some Banner Text</p>
+    <p id="home_banner_title">Some Banner Text</p>
+    <p id="home_banner_subtitle">And a subtitle, too</p>
   </div>
 </div>
 
-<div layout="row" layout-xs="row">
-  
-    <h1 class="md-title">{{user.firstName}}'s Lessons</h1>
+<md-content layout-padding>
 
-    <!-- sort lessons option -->
+  <div layout="row" layout-xs="row">
+    <h1 class="md-title">{{Home.name}}'s Lessons</h1>
+  </div>
 
-    <md-input-container>
-     <label>Sort</label>
-        <md-select ng-model="sort">
-          <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
-        </md-select>
+  <md-button class="md-raised md-accent" hide-xs aria-label="Create Lesson">Create Lesson</md-button>
+
+  <!-- sort lessons option -->
+
+  <md-input-container>
+    <label>Sort</label>
+    <md-select ng-model="sort" hide-xs>
+      <md-option ng-repeat="sort in sorts" value="{{sort}}" >{{Home.sorts}}</md-option>
+    </md-select>
   </md-input-container>
-  
+
+
 
   <!-- ng-repeat logged-in user's lessons-->
 
 
+</md-content>
 
-
-
-<md-button class="md-fab md-fab-bottom-right docs-scroll-fab"
-                 docs-scroll-class="scrolling"
-                 ng-click=""
-                 aria-label="Create Lesson">
-        <md-tooltip md-direction="top">Create Lesson</md-tooltip>
-        <md-icon aria-label="Menu" class="material-icons">create</md-icon>
-      </md-button>
-
-</div>
-
-
-
-  
-
+<md-button class="md-fab md-fab-bottom-right docs-scroll-fab" docs-scroll-class="scrolling" ng-click="" aria-label="Create Lesson" hide-gt-xs>
+  <md-tooltip md-direction="top">Create Lesson</md-tooltip>
+  <md-icon aria-label="Menu" class="material-icons">add</md-icon>
+</md-button>

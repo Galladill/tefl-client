@@ -4,9 +4,9 @@
     angular
         .module('lesson')
         .controller('LessonController', LessonController);
-    LessonController.$inject = ['$mdSidenav', '$mdDialog', 'lessonService', 'activityService', '$q', '$mdToast'];
+    LessonController.$inject = ['$mdSidenav', '$mdDialog', 'lessonService', 'activityService', '$q', '$mdToast', '$routeParams'];
 
-    function LessonController($mdSidenav, $mdDialog, lessonService, activityService, $q, $mdToast) {
+    function LessonController($mdSidenav, $mdDialog, lessonService, activityService, $q, $mdToast, $routeParams) {
         // Attach functions to the controller here.
         var vm = this;
         vm.addGoal = _addGoal;
@@ -17,11 +17,10 @@
         vm.addActivity = _addActivity;
         vm.saveLesson = _saveLesson;
         vm.saveActivity = _saveActivity;
-
         // Any logic that needs to run when the controller loads should be placed here.
         $q.all({
-            lesson: lessonService.getLesson('589a2b55ae59620ac700793e'),
-            activities: activityService.getActivities()
+            lesson: lessonService.getLesson($routeParams.id),
+            activities: activityService.getActivities(),
         }).then(function (response, err) {
             vm.allActivities = response.activities;
             vm.lesson = response.lesson;
@@ -83,15 +82,15 @@
             if (activity._id) {
                 // Update an existing activity
                 activityService.updateActivity(activity).then(function (res, err) {
-                    showSuccessToast();
+                vm.saveLesson();
                 });
             } else {
                 // Create a new activity
                 activityService.createActivity(activity).then(function (newActivity, err) {
                     vm.allActivities.push(newActivity);
                     vm.addActivity(newActivity);
+                    vm.saveLesson();
                     $mdDialog.hide();
-                    showSuccessToast();
                 });
             }
         }

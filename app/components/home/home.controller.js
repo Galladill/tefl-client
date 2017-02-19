@@ -5,15 +5,16 @@
         .module('home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$localStorage', 'lessonService', '$q', '$mdToast', 'authService', 'userService'];
+    HomeController.$inject = ['$localStorage', 'lessonService', 'authService', '$location'];
 
-    function HomeController($localStorage, lessonService, authService) {
+    function HomeController($localStorage, lessonService, authService, $location) {
         // Attach functions to the controller here.
         var vm = this;
         vm.editLesson = _editLesson;
         vm.deleteLesson = _deleteLesson;
         vm.createLesson = _createLesson;
         vm.logout = HomeController.logout;
+        vm.goToLesson = _goToLesson;
 
         // Any logic that needs to run when the controller loads should be placed here.
         vm.sorts = [
@@ -47,6 +48,9 @@
         }
         function _createLesson() {
 
+        }
+        function _goToLesson(id) {
+            $location.path('/lesson/' + id);
         }
         
 

@@ -1,14 +1,21 @@
 <md-sidenav md-component-id="left" class="md-sidenav-left">
-	<h1>My Activities</h1>
-	<div ng-repeat="activity in Lesson.allActivities" layout="row" layout-align="space-between">
-        <p>{{activity.title}} </p>
-        <div>
-            <md-button ng-click="Lesson.editActivity($event, activity)" class="md-icon-button md-primary">
-                <md-icon aria-label="Create" class="material-icons">create</md-icon>
-            </md-button>
-            <md-button ng-click="Lesson.addActivity(activity)" class="md-icon-button md-accent" ng-disabled="Lesson.lesson._activity.indexOf(activity._id) >= 0">
-                <md-icon aria-label="Add" class="material-icons">add</md-icon>
-            </md-button>
-        </div>
-	</div>
+		<md-toolbar class="md-tall md-primary">
+            <h5 class="md-display-1 text-center">My Activities</h5>
+		</md-toolbar>
+		<div ng-repeat="(idx, activity) in Lesson.allActivities" layout="row" layout-align="space-between center" ng-class="{'gray-bg': idx % 2 === 0}">
+			<div layout-padding>
+				<h4 class="no-margin">{{activity.title}}</h4>
+				<h6 class="no-margin">{{activity.level}} - {{activity.duration}}m</h6>
+			</div>
+			<div layout="row">
+				<md-button ng-click="Lesson.editActivity($event, activity)" class="md-icon-button md-primary">
+                    <md-tooltip>Edit Activity</md-tooltip>
+					<md-icon aria-label="Create" class="material-icons">create</md-icon>
+				</md-button>
+				<md-button ng-click="Lesson.addActivity(activity)" class="md-icon-button md-accent" ng-disabled="Lesson.lesson._activity.indexOf(activity._id) >= 0">
+                    <md-tooltip>Add to Lesson</md-tooltip>
+                    <md-icon aria-label="Add" class="material-icons">add</md-icon>
+				</md-button>
+			</div>
+		</div>
 </md-sidenav>

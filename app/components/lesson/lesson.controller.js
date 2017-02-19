@@ -17,6 +17,8 @@
         vm.addActivity = _addActivity;
         vm.saveLesson = _saveLesson;
         vm.saveActivity = _saveActivity;
+        vm.closeDialog = _closeDialog;
+
         // Any logic that needs to run when the controller loads should be placed here.
         $q.all({
             lesson: lessonService.getLesson($routeParams.id),
@@ -44,6 +46,10 @@
                 vm.teacherGoals.push({ goal: '' });
             }
         });
+        vm.dragControlListeners = {
+            accept: function (sourceItemHandleScope, destSortableScope) {return true}//override to determine drag is allowed or not. default is true.
+        };
+
 
 
         // Define functions here
@@ -87,7 +93,7 @@
             } else {
                 // Create a new activity
                 activityService.createActivity(activity).then(function (newActivity, err) {
-                    vm.allActivities.push(newActivity);
+                    vm.allActivities.splice(0, 0, newActivity);
                     vm.addActivity(newActivity);
                     vm.saveLesson();
                     $mdDialog.hide();
@@ -109,6 +115,10 @@
             var index = vm.lesson._activity.indexOf(activity._id);
             vm.lesson._activity.splice(index, 1);
             vm.lesson.duration -= activity.duration;
+        }
+
+        function _closeDialog() {
+            $mdDialog.hide();
         }
 
         // Add an activity to a lesson

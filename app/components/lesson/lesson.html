@@ -1,71 +1,83 @@
 <div layout-sm="column" layout-gt-sm="row">
 	<div class="full-cover-bg journal-bg" flex-sm="100" flex-gt-sm="30">
-		<div layout="column" layout-align="start center">
-			<md-input-container style="width: 80%">
-				<label>Lesson Title</label>
-				<input required type="text" name="title" ng-model="Lesson.lesson.title">
+		<div layout="column" layout-align="center center" layout-padding>
+			<md-input-container>
+				<label class="white-text">Lesson Title</label>
+				<input style="font-size: 2em" class="white-text" required type="text" name="title" ng-model="Lesson.lesson.title">
 				<div ng-messages="lessonForm.title.$error">
 					<div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
 				</div>
 			</md-input-container>
-			<h4 class="text-center">Duration: {{Lesson.lesson.duration}}m</h4>
+			<h4 class="text-center white-text no-margin ">Duration: {{Lesson.lesson.duration}}m</h4>
 		</div>
-		<div layout-sm="column" layout-align-sm="start center" layout-padding>
-			<h4>Student Goals</h4>
+		<div layout="column" layout-align="start center" layout-padding>
+			<div layout="row" layout-align="start center">
+				<h4 class="white-text ">Student Goals</h4>
+				<md-button ng-click="Lesson.addGoal(Lesson.studentGoals)" ng-disabled="Lesson.studentGoals.length >= 3" class="md-icon-button  md-primary">
+					<md-tooltip>Add Student Goal</md-tooltip>
+					<md-icon aria-label="Add" class="material-icons">add</md-icon>
+				</md-button>
+			</div>
 			<div ng-repeat="(idx, studentGoal) in Lesson.studentGoals">
-				<md-input-container style="width: 65%" class="no-margin no-error-spacer goal-input" md-no-float>
-					<input md-no-float class="md-block" ng-model="Lesson.studentGoals[idx].goal" placeholder="Student Goal {{idx + 1}}">
+				<md-input-container class="no-margin no-error-spacer goal-input " md-no-float>
+					<input class="white-text" md-no-float class="md-block" ng-model="Lesson.studentGoals[idx].goal" placeholder="Student Goal {{idx + 1}}">
 				</md-input-container>
 
 				<md-button ng-click="Lesson.deleteGoal(Lesson.studentGoals, idx)" ng-disabled="Lesson.studentGoals.length == 1" class="md-icon-button md-accent">
+					<md-tooltip>Remove Goal</md-tooltip>
 					<md-icon aria-label="Clear" class="material-icons">clear</md-icon>
 				</md-button>
 			</div>
-			<md-button ng-click="Lesson.addGoal(Lesson.studentGoals)" ng-if="Lesson.studentGoals.length < 3" class=" md-primary">Add Student Goal</md-button>
-			<h4>Teacher Goals</h4>
+			<div layout="row" layout-align="start center">
+				<h4 class="white-text">Teacher Goals</h4>
+				<md-button ng-click="Lesson.addGoal(Lesson.teacherGoals)" ng-disabled="Lesson.teacherGoals.length >= 3" class="md-icon-button md-primary">
+					<md-tooltip>Add Teacher Goal</md-tooltip>
+					<md-icon aria-label="Add" class="material-icons">add</md-icon>
+				</md-button>
+			</div>
 			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals">
-				<md-input-container style="width: 65%" class="no-margin no-error-spacer goal-input" md-no-float>
-					<input ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
+				<md-input-container class="no-margin no-error-spacer goal-input" md-no-float>
+					<input class="white-text" ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
 				</md-input-container>
 				<md-button ng-click="Lesson.deleteGoal(Lesson.teacherGoals, idx)" ng-disabled="Lesson.teacherGoals.length == 1" class="md-icon-button md-accent">
+					<md-tooltip>Remove Goal</md-tooltip>
 					<md-icon aria-label="Clear" class="material-icons">clear</md-icon>
 				</md-button>
 			</div>
-			<md-button ng-click="Lesson.addGoal(Lesson.teacherGoals)" ng-if="Lesson.teacherGoals.length < 3" class=" md-primary">Add Teacher Goal</md-button>
 		</div>
 	</div>
 
-	<div style="background-color: lightgray" flex-sm="100" flex-gt-sm="70">
-		<div layout="row">
-			<md-button class="md-primary" ng-click="Lesson.openSideNav()">My Activities</md-button>
-			<md-button class="md-primary" ng-click="Lesson.editActivity($event)">Create Activity</md-button>
-			<md-button class="md-primary md-raised" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
-		</div>
-
-
-		<md-list>
-			<md-list-item class="md-3-line" ng-repeat="activity in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0">
-				<div layout="row" layout-align="space-between">
-					<div class="md-list-item" layout="column">
-						<h3>{{activity.title}}</h3>
-						<p>{{activity.duration}} minutes</p>
-						<div layout="row">
-							<md-button ng-click="Lesson.editActivity($event, activity)" class="md-icon-button md-primary">
-								<md-icon aria-label="Create" class="material-icons">create</md-icon>
-							</md-button>
-							<md-button ng-click="Lesson.removeActivity(activity)" class="md-icon-button md-accent">
-								<md-icon aria-label="Clear" class="material-icons">clear</md-icon>
-							</md-button>
-						</div>
-					</div>
-					<p>{{activity.description}}</p>
-				</div>
-
-
+	<div flex-sm="100" flex-gt-sm="70" class="lesson-builder">
+		<md-toolbar class="md-primary">
+			<div layout="row" flex>
+				<md-button class="white-text" ng-click="Lesson.openSideNav()">My Activities</md-button>
+				<md-button class="white-text" ng-click="Lesson.editActivity($event)">Create Activity</md-button>
+				<md-button class="md-raised md-accent white-text" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
+			</div>
+		</md-toolbar>
+		<md-list as-sortable="vm.dragControlListners">
+			<md-list-item as-sortable-item layout="row" layout-padding class="md-3-line" ng-repeat="(idx, activity) in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0">
+                <div flex="30" layout="column">
+                    <h3 class="no-margin">{{activity.title}}</h3>
+                    <h5>{{activity.level}} - {{activity.duration}}m</h5>
+                    <div layout="row">
+                        <md-button ng-click="Lesson.editActivity($event, activity)" class="md-icon-button md-primary">
+                            <md-tooltip>Edit Activity</md-tooltip>
+                            <md-icon aria-label="Create" class="material-icons">create</md-icon>
+                        </md-button>
+                        <md-button ng-click="Lesson.removeActivity(activity)" class="md-icon-button md-accent">
+                            <md-tooltip>Remove Activity</md-tooltip>
+                            <md-icon aria-label="Clear" class="material-icons">clear</md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <div flex="70">
+                    <p class="activity-desc">{{activity.description}}</p>
+                    <md-divider></md-divider>
+                    <nd-button class="md-primary" as-sortable-item-handle>asd</md-button>
+                </div>
 			</md-list-item>
 		</md-list>
-
-
 	</div>
 </div>
 <ng-include src="'app/components/lesson/activities.html'"></ng-include>

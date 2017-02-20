@@ -56,25 +56,27 @@
 			</div>
 		</md-toolbar>
 		<md-list ng-model="Lesson.lesson._activity">
-			<md-list-item  layout="row" layout-padding class="md-3-line"  ng-repeat="(idx, activityId) in Lesson.lesson._activity" ng-init="activity = Lesson.findActivity(activityId)">
-                <div flex="30" layout="column">
-                    <h3 class="no-margin">{{activity.title}}</h3>
-                    <h5>{{activity.level}} - {{activity.duration}}m</h5>
-                    <div layout="row">
-                        <md-button ng-click="Lesson.editActivity($event, activity)" class="md-icon-button md-primary">
-                            <md-tooltip>Edit Activity</md-tooltip>
-                            <md-icon aria-label="Create" class="material-icons">create</md-icon>
-                        </md-button>
-                        <md-button ng-click="Lesson.removeActivity(activity)" class="md-icon-button md-accent">
-                            <md-tooltip>Remove Activity</md-tooltip>
-                            <md-icon aria-label="Clear" class="material-icons">clear</md-icon>
-                        </md-button>
-                    </div>
-                </div>
-                <div flex="70">
-                    <p class="activity-desc">{{activity.description}}</p>
-                    <md-divider></md-divider>
-                </div>
+			<md-list-item layout="row" layout-wrap layout-align="start start" layout-padding ng-repeat="(idx, activityId) in Lesson.lesson._activity" ng-init="activity = Lesson.findActivity(activityId)">
+				<div flex="100">
+					<h6 class="no-margin md-headline">{{activity.title}}</h6>
+				</div>
+				<div flex="30" layout="column">
+					<h5>{{activity.level}} - {{activity.duration}}m</h5>
+					<div layout="row">
+						<md-button ng-click="Lesson.editActivity($event, activity)" class="md-icon-button md-primary">
+							<md-tooltip>Edit Activity</md-tooltip>
+							<md-icon aria-label="Create" class="material-icons">create</md-icon>
+						</md-button>
+						<md-button ng-click="Lesson.removeActivity(activity)" class="md-icon-button md-accent">
+							<md-tooltip>Remove Activity</md-tooltip>
+							<md-icon aria-label="Clear" class="material-icons">clear</md-icon>
+						</md-button>
+					</div>
+				</div>
+				<div flex="70">
+					<p class="activity-desc">{{activity.description}}</p>
+					<md-divider></md-divider>
+				</div>
 			</md-list-item>
 		</md-list>
 	</div>

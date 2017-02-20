@@ -18,6 +18,7 @@
         vm.saveLesson = _saveLesson;
         vm.saveActivity = _saveActivity;
         vm.closeDialog = _closeDialog;
+        vm.findActivity = _findActivity;
 
         // Any logic that needs to run when the controller loads should be placed here.
         $q.all({
@@ -46,12 +47,7 @@
                 vm.teacherGoals.push({ goal: '' });
             }
         });
-        vm.dragControlListeners = {
-            accept: function (sourceItemHandleScope, destSortableScope) {return true}//override to determine drag is allowed or not. default is true.
-        };
-
-
-
+        
         // Define functions here
 
         function _addGoal(goalList) {
@@ -99,6 +95,12 @@
                     $mdDialog.hide();
                 });
             }
+        }
+
+        function _findActivity(activityId) {
+            return $.grep(vm.allActivities, function(e){
+                return e._id === activityId;
+            })[0];
         }
 
         function showSuccessToast() {

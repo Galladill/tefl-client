@@ -55,8 +55,8 @@
 				<md-button class="md-raised md-accent white-text" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
 			</div>
 		</md-toolbar>
-		<md-list as-sortable="vm.dragControlListners">
-			<md-list-item as-sortable-item layout="row" layout-padding class="md-3-line" ng-repeat="(idx, activity) in Lesson.allActivities" ng-if="Lesson.lesson._activity.indexOf(activity._id) >= 0">
+		<md-list ng-model="Lesson.lesson._activity">
+			<md-list-item  layout="row" layout-padding class="md-3-line"  ng-repeat="(idx, activityId) in Lesson.lesson._activity" ng-init="activity = Lesson.findActivity(activityId)">
                 <div flex="30" layout="column">
                     <h3 class="no-margin">{{activity.title}}</h3>
                     <h5>{{activity.level}} - {{activity.duration}}m</h5>
@@ -74,7 +74,6 @@
                 <div flex="70">
                     <p class="activity-desc">{{activity.description}}</p>
                     <md-divider></md-divider>
-                    <nd-button class="md-primary" as-sortable-item-handle>asd</md-button>
                 </div>
 			</md-list-item>
 		</md-list>

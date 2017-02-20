@@ -1,28 +1,66 @@
-<md-toolbar layout="row" class="md-toolbar-tools">
-	<md-button class="md-icon-button" aria-label="Settings">
-	</md-button>
-	<p>
-		<span>Logo</span>
-	</p>
+<md-toolbar>
+  <div class="md-toolbar-tools">
+  Entruct Logo
+  <span flex> </span>
+  <md-button aria-label="Log Out" ng-click="logout()">
+             Logout
+           </md-button>
+  </div>
 </md-toolbar>
-<div layout="row" layout-xs="row">
-	<div class="banner">
-		<p id="home_banner_title">Some Banner Text</p>
-	</div>
-</div>
 
 <div layout="row" layout-xs="row">
-	<h1 class="md-title">{{user.firstName}}'s Lessons</h1>
-	<!-- sort lessons option -->
-	<md-input-container>
-		<label>Sort</label>
-		<md-select ng-model="sort">
-			<md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
-		</md-select>
-	</md-input-container>
-	<!-- ng-repeat logged-in user's lessons-->
-	<md-button class="md-fab md-fab-bottom-right docs-scroll-fab" docs-scroll-class="scrolling" ng-click="" aria-label="Create Lesson">
-		<md-tooltip md-direction="top">Create Lesson</md-tooltip>
-		<md-icon aria-label="Menu" class="material-icons">create</md-icon>
-	</md-button>
+  <div class="banner">
+    <p id="home_banner_title">Create. Teach. Repeat.</p>
+    <p id="home_banner_subtitle" hide show-md show-sm show-gt-md flex>Dynamic Tools for ESL and TEFL Instructors</p>
+  </div>
+</div>
+
+<div id="home_lesson_content">
+
+  <md-content layout-padding>
+
+    <h1 class="md-title" id="home_username_title">{{Home.name}}'s Lessons</h1>
+    <md-button class="md-raised md-accent white-text" hide-xs aria-labe l="Create Lesson">Create Lesson</md-button>
+
+    <!-- sort lessons option -->
+
+    <md-input-container>
+      <label>Sort</label>
+      <md-select ng-model="sort">
+        <md-option ng-repeat="sort in sorts" value="{{sort}}">{{Home.sorts}}</md-option>
+      </md-select>
+    </md-input-container>
+<div id="lesson_selection" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
+  
+  <!-- ng-repeat logged-in user's lessons-->
+
+  
+    <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center" ng-repeat="lesson in Home.lessons">
+      <span>
+        <label class="lesson_frame title"><b>{{lesson.title}}</b></label>
+         <br>
+        {{lesson.level}} &#8227; {{lesson.duration}}m
+         <br><br>
+          <md-button aria-label="Edit Lesson" ng-click="Home.goToLesson(lesson._id)">
+           <md-icon class="matieral-icons">create</md-icon>
+            Edit
+           </md-button>
+           <md-button aria-label="Delete Lesson" ng-click="">
+            <md-icon class="matieral-icons">delete</md-icon>
+             Delete
+           </md-button>
+          </span>
+    </md-whiteframe>
+
+    
+
+    </div>
+  </md-content>
+
+  <md-button class="md-fab md-fab-bottom-right docs-scroll-fab" docs-scroll-class="scrolling" ng-click="" aria-label="Create Lesson"
+    hide-gt-xs style="position: fixed">
+    <md-tooltip md-direction="top">Create Lesson</md-tooltip>
+    <md-icon aria-label="Menu" class="material-icons mobile">add</md-icon>
+    </md-button>
+
 </div>

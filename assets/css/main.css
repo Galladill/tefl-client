@@ -118,9 +118,15 @@ box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
 .activity-title {
     width: 95%;
 }
-
+.toolbar-placeholder {
+    height: 64px;
+}
 .lesson-toolbar {
     position: absolute;
+}
+
+.no-underline {
+    text-decoration: none;
 }
 
 .banner {

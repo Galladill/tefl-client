@@ -55,6 +55,11 @@
 				<md-button class="md-raised md-accent white-text" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
 			</div>
 		</md-toolbar>
+		<div class="toolbar-placeholder"></div>
+		<h4 class="md-headline text-center" ng-if="Lesson.lesson._activity.length === 0">
+			You haven't added any activities to this lesson yet. </br>
+			<a class="no-underline" ng-click="Lesson.editActivity($event)" href="">Create an activity</a> or <a ng-click="Lesson.openSideNav()" class="no-underline" href="">View your activities</a>
+		</h4>
 		<md-list ng-model="Lesson.lesson._activity">
 			<md-list-item layout="row" layout-wrap layout-align="start start" layout-padding ng-repeat="(idx, activityId) in Lesson.lesson._activity" ng-init="activity = Lesson.findActivity(activityId)">
 				<div flex="100">

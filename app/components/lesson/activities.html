@@ -2,6 +2,11 @@
 		<md-toolbar class="md-tall md-primary">
             <h5 class="md-display-1 text-center">My Activities</h5>
 		</md-toolbar>
+		<h4 class="md-body text-center" ng-if="Lesson.allActivities.length === 0">
+			You haven't created any activities yet.</br>
+			<a class="no-underline" ng-click="Lesson.editActivity($event)" href="">Create an activity</a>
+		</h4>
+
 		<div ng-repeat="(idx, activity) in Lesson.allActivities" layout="row" layout-align="space-between center" ng-class="{'gray-bg': idx % 2 === 0}">
 			<div layout-padding>
 				<h4 class="no-margin">{{activity.title}}</h4>

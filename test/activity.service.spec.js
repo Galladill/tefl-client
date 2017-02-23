@@ -15,7 +15,6 @@ describe('activityService', function () {
         $http = _$http_;
         $q = _$q_;
         $httpBackend = _$httpBackend_;
-        
     }));
 
     describe('createActivity function', function () {

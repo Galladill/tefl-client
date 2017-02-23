@@ -2,7 +2,7 @@
   <div class="md-toolbar-tools">
   Entruct Logo
   <span flex> </span>
-  <md-button aria-label="Log Out" ng-click="logout()">
+  <md-button aria-label="Log Out" ng-click="Home.logout()">
              Logout
            </md-button>
   </div>
@@ -20,7 +20,7 @@
   <md-content layout-padding>
 
     <h1 class="md-title" id="home_username_title">{{Home.name}}'s Lessons</h1>
-    <md-button class="md-raised md-accent white-text" hide-xs aria-labe l="Create Lesson">Create Lesson</md-button>
+    <md-button class="md-raised md-accent white-text" hide-xs aria-labe l="Create Lesson" ng-click="Home.newLesson()">Create Lesson</md-button>
 
     <!-- sort lessons option -->
 
@@ -34,7 +34,6 @@
   
   <!-- ng-repeat logged-in user's lessons-->
 
-  
     <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center" ng-repeat="lesson in Home.lessons">
       <span>
         <label class="lesson_frame title"><b>{{lesson.title}}</b></label>
@@ -45,7 +44,7 @@
            <md-icon class="matieral-icons">create</md-icon>
             Edit
            </md-button>
-           <md-button aria-label="Delete Lesson" ng-click="">
+           <md-button aria-label="Delete Lesson" ng-click="Home.deleteLesson(lesson._id)">
             <md-icon class="matieral-icons">delete</md-icon>
              Delete
            </md-button>
@@ -53,11 +52,10 @@
     </md-whiteframe>
 
     
-
     </div>
   </md-content>
 
-  <md-button class="md-fab md-fab-bottom-right docs-scroll-fab" docs-scroll-class="scrolling" ng-click="" aria-label="Create Lesson"
+  <md-button class="md-fab md-fab-bottom-right docs-scroll-fab" docs-scroll-class="scrolling" ng-click="Home.newLesson()" aria-label="Create Lesson"
     hide-gt-xs style="position: fixed">
     <md-tooltip md-direction="top">Create Lesson</md-tooltip>
     <md-icon aria-label="Menu" class="material-icons mobile">add</md-icon>

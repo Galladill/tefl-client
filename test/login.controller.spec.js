@@ -44,7 +44,7 @@ describe('Login Controller', function() {
 			expect(LoginCtrl.user.confirmPassword).toEqual(undefined);
 			expect(LoginCtrl.user.confirmEmail).toEqual(undefined);
 			$rootScope.$apply();
-			expect($location.path()).toBe('/');
+			expect($location.path()).toBe('/home');
 		});
 	});
 

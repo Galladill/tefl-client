@@ -1,10 +1,10 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-  Entruct Logo
-  <span flex> </span>
-  <md-button aria-label="Log Out" ng-click="Home.logout()">
-             Logout
-           </md-button>
+    Entruct Logo
+    <span flex> </span>
+    <md-button aria-label="Log Out" ng-click="Home.logout()">
+      Logout
+    </md-button>
   </div>
 </md-toolbar>
 
@@ -25,18 +25,31 @@
     <!-- sort lessons option -->
 
     <md-input-container>
-      <label>Sort</label>
-      <md-select ng-model="sort">
-        <md-option ng-repeat="sort in sorts" value="{{sort}}">{{Home.sorts}}</md-option>
-      </md-select>
+      <md-menu md-offset="0 -5">
+        <md-button aria-label="Sort Lessons" ng-click="Home.openMenu($mdOpenMenu, $event)">
+          <md-icon class="matieral-icons">sort</md-icon>
+          Sort Lessons
+        </md-button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="">Do Something</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="">Do Something</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="">Do Something</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </md-input-container>
-<div id="lesson_selection" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-  
-  <!-- ng-repeat logged-in user's lessons-->
 
-    <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center" ng-repeat="lesson in Home.lessons">
-      <span>
-        <label class="lesson_frame title"><b>{{lesson.title}}</b></label>
+    <div id="lesson_selection" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
+      <!-- ng-repeat logged-in user's lessons-->
+      <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center"
+        ng-repeat="lesson in Home.lessons">
+        <span>
+        <label class="lesson_frame title"><b>{{lesson.title | limitTo: 15}}</b></label>
          <br>
         {{lesson.level}} &#8227; {{lesson.duration}}m
          <br><br>
@@ -49,9 +62,9 @@
              Delete
            </md-button>
           </span>
-    </md-whiteframe>
+        </md-whiteframe>
 
-    
+
     </div>
   </md-content>
 

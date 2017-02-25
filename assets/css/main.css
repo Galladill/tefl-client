@@ -162,7 +162,7 @@ md-icon.mobile {
   height: auto !important;
 }
 md-icon {
-    display: block !important;
+    display: in-line block !important;
 }
 
 md-button {
@@ -189,6 +189,8 @@ md-raised {
 }
 .lesson_frame.title {
     font-size: 24px;
+    max-width: 20px;
+    overflow: hidden;
 }
 #home_lesson_content {
     background-color: #D7DBDD;
@@ -219,5 +221,5 @@ md-toolbar {
     }
 }
 .newLesson-dialog {
-    min-width: 300px;
+    max-width: 300px;
 }

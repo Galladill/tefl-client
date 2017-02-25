@@ -5,19 +5,17 @@
         .module('home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$localStorage', 'lessonService', 'authService', '$location', '$mdDialog', '$mdToast'];
+    HomeController.$inject = ['$localStorage', 'lessonService', 'authService', '$location', '$mdDialog', '$mdToast', '$mdMenu'];
 
-    function HomeController($localStorage, lessonService, authService, $location, $mdDialog, $mdToast) {
+    function HomeController($localStorage, lessonService, authService, $location, $mdDialog, $mdToast, $mdMenu) {
         // Attach functions to the controller here.
         var vm = this;
         vm.deleteLesson = _deleteLesson;
         vm.newLesson = _newLesson;
         vm.logout = _logOut;
         vm.goToLesson = _goToLesson;
-
-        // Any logic that needs to run when the controller loads should be placed here.
-
-        // array for sorting lessons
+        vm.sortLessons = _sortLessons;
+        vm.openMenu = _openMenu;
 
         // get all user's lessons
         lessonService.getLessons().then(function (lessons, err) {
@@ -26,9 +24,7 @@
             console.log(lessons);
         });
 
-
         vm.name = $localStorage.tefl.firstName;
-
 
         // Define functions here.
         function _deleteLesson(id) {
@@ -39,11 +35,18 @@
                 .targetEvent()
                 .ok('Delete')
                 .cancel('Cancel');
-
-            $mdDialog.show(confirm).then(function () {
-                lessonService.deleteLesson(id);
-                // If lesson was successfully deleted, show delete toast
-                showDeleteToast();
+            $mdDialog.show(confirm).then(function (lesson) {
+                var index = vm.lessons.indexOf(id);
+                if (index >= 0) {
+                    vm.lessons.splice(index, 1);
+                }
+                lessonService.deleteLesson(id).then(function () {
+                    lessonService.getLessons().then(function (lessons, err) {
+                        // Get all user's lessons from back-end
+                        vm.lessons = lessons;
+                        console.log(lessons);
+                    });
+                });
             });
         }
 
@@ -67,18 +70,14 @@
                 .cancel('Cancel');
             $mdDialog.show(confirm).then(function (result) {
                 // create new lesson with result as name
-                console.log('Working to create ' + result + '...');
-                lessonService.createLesson(result).then(function (newLesson, err) {
-                    vm.allLessons.push(newLesson);
-                    vm.addLesson(newLesson);
-                    vm.saveLesson();
-                    $mdDialog.hide();
+                console.log('Creating ' + result + '...');
+                var newLesson = { title: result }
+                lessonService.createLesson(newLesson).then(function (createdLesson, err) {
                     // go to new lesson  
-                    // $location.path('/lesson/' + id);
+                    $location.path('/lesson/' + createdLesson._id);
                 });
             });
         }
-
 
         function showDeleteToast() {
             $mdToast.show(
@@ -87,6 +86,16 @@
                     .position('top right')
                     .hideDelay(3000)
             );
+        }
+
+        function _sortLessons(lessons) {
+
+        }
+
+        var originatorEv;
+        function _openMenu($mdOpenMenu, ev) {
+            originatorEv = ev;
+            $mdOpenMenu(ev);
         }
     }
 

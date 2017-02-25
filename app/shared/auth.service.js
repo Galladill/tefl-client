@@ -8,42 +8,9 @@
     authService.$inject = ['$http', '$q', '$localStorage', '$rootScope', '$location', '$route', 'authConfig'];
     function authService($http, $q, $localStorage, $rootScope, $location, $route, authConfig) {
         var service = this;
-        activate();
-        function activate() {
-            $rootScope.$on('$routeChangeSuccess', function (event, currentRoute, previousRoute) {
-                if (currentRoute.$$route) {
-                    if (authConfig.privateRoutes.indexOf(currentRoute.$$route.originalPath) >= 0) {
-                        // If this route is part of the private routes list and accessToken is expired, then attempt a refresh
-                        var now = Date.now();
-                        var expiresAt;
-                        if ($localStorage.tefl) {
-                            expiresAt = $localStorage.tefl.accessTokenExpires * 1000;
-                            if (expiresAt < now) {
-                                event.preventDefault();
-                                service.refresh().then(
-                                    function (data) {
-                                        // You're still authorized, continue to the page.
-                                        $route.reload();
-                                    },
-                                    function (data) {
-                                        // You're not authorized, redirect
-                                        delete $localStorage.tefl;
-                                        $location.path(authConfig.redirectRoute);
-                                    }
-                                );
-                            } else {
-                                // accessToken not expired, no refresh required.
-                            }
-                        } else {
-                            // You don't have token information, redirect
-                            $location.path(authConfig.redirectRoute);
-                        }
-                    }
-                }
-            });
-        }
+        var loggedIn, tokenExpired, isPrivateRoute, isLoginPage;
 
-        this.login = function(email, password) {
+        this.login = function (email, password) {
             var url = '/login';
             var params = {
                 email: email,
@@ -61,9 +28,9 @@
                     q.reject('Error, unable to login at this time.');
                 });
             return q.promise;
-        }
+        };
 
-        this.logout = function() {
+        this.logout = function () {
             var url = authConfig.authUrl + 'logout';
             var q = $q.defer();
             $http.post(url, {}).
@@ -72,7 +39,7 @@
                     service.allowedRoutes = routePermissions({});
                     var currentPath = $route.current.$$route.originalPath;
                     if (service.allowedRoutes.public.indexOf(currentPath) === -1) {
-                        $location.path(authConfig.redirectRoute);
+                        $location.path(authConfig.loginRoute);
                     }
                     q.resolve(data);
                 }).
@@ -80,9 +47,9 @@
                     q.reject('Error, unable to logout at this time.');
                 });
             return q.promise;
-        }
+        };
 
-        this.refresh = function() {
+        this.refresh = function () {
             var q = $q.defer();
             if ($localStorage.tefl && $localStorage.tefl.accessToken) {
                 var url = authConfig.authUrl + 'refresh';
@@ -101,13 +68,78 @@
                 q.reject('No access token!');
             }
             return q.promise;
+        };
+        console.log($location);
+        checkAuth($location.$$path);
+        $rootScope.$on('$routeChangeStart', function (event, currentRoute, previousRoute) {
+            checkAuth(currentRoute.$$route.originalPath);
+        });
+
+        function checkAuth(route) {
+            if (route === authConfig.loginRoute) {
+                isLoginPage = true;
+            } else {
+                isLoginPage = false;
+            }
+
+            if (authConfig.privateRoutes.indexOf(route) >= 0) {
+                isPrivateRoute = true;
+            } else {
+                isPrivateRoute = false;
+            }
+
+            if ($localStorage.tefl) {
+                loggedIn = true;
+                var now = Date.now();
+                var expiresAt = $localStorage.tefl.accessTokenExpires * 1000;
+                if (expiresAt < now) {
+                    tokenExpired = true;
+                } else {
+                    tokenExpired = false;
+                }
+            } else {
+                loggedIn = false;
+                tokenExpired = true;
+            }
+
+            if (loggedIn) {
+                if (tokenExpired) {
+                    event.preventDefault();
+                    service.refresh().then(
+                        function (data) {
+                            // You're still authorized, continue to the page.
+                            console.log('successful reload');
+                            if (isLoginPage) {
+                                // if we're properly logged in already, no need to see login page.
+                                $location.path(authConfig.authRedirectRoute);
+                            } else {
+                                $route.reload();
+                            }
+                        },
+                        function (data) {
+                            // You're not authorized, redirect
+                            delete $localStorage.tefl;
+                            $location.path(authConfig.loginRoute);
+                        }
+                    );
+                } else {
+                    if (isLoginPage) {
+                        // if we're properly logged in already, no need to see login page.
+                        $location.path(authConfig.authRedirectRoute);
+                    }
+                }
+            } else {
+                if (isPrivateRoute) { 
+                    $location.path(authConfig.loginRoute);
+                }
+            }
         }
 
         /* 
         ** Check to see if the refreshToken is expired (client-side)
         ** Can be used for ng-if statements, and other front-end logic
         */
-        this.getLoginStatus = function() {
+        this.getLoginStatus = function () {
             var now = Date.now();
             var expiresAt;
             if ($localStorage.tefl) {
@@ -117,14 +149,14 @@
                 }
             }
             return false;
-        }
+        };
 
-        this.getAccessToken = function() {
+        this.getAccessToken = function () {
             var accessToken;
             if ($localStorage.tefl) {
                 accessToken = $localStorage.tefl.accessToken;
             }
             return accessToken;
-        }
+        };
     }
-} ());
+}());

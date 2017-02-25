@@ -69,7 +69,6 @@
             }
             return q.promise;
         };
-        console.log($location);
         checkAuth($location.$$path);
         $rootScope.$on('$routeChangeStart', function (event, currentRoute, previousRoute) {
             checkAuth(currentRoute.$$route.originalPath);
@@ -91,7 +90,7 @@
             if ($localStorage.tefl) {
                 loggedIn = true;
                 var now = Date.now();
-                var expiresAt = $localStorage.tefl.accessTokenExpires * 1000;
+                var expiresAt = $localStorage.tefl.accessTokenExpires;
                 if (expiresAt < now) {
                     tokenExpired = true;
                 } else {
@@ -108,7 +107,6 @@
                     service.refresh().then(
                         function (data) {
                             // You're still authorized, continue to the page.
-                            console.log('successful reload');
                             if (isLoginPage) {
                                 // if we're properly logged in already, no need to see login page.
                                 $location.path(authConfig.authRedirectRoute);
@@ -129,7 +127,7 @@
                     }
                 }
             } else {
-                if (isPrivateRoute) { 
+                if (isPrivateRoute) {
                     $location.path(authConfig.loginRoute);
                 }
             }
@@ -159,4 +157,4 @@
             return accessToken;
         };
     }
-}());
+} ());

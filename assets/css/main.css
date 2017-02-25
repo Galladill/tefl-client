@@ -43,13 +43,16 @@
 
 #login-header {
     color: white;
-    padding-top: 20%;
+    padding-top: 25%;
+    text-shadow: 2px 2px 25px #1C2833;
 }
 
 #slogan-text {
     margin-left: 10%;
     margin-right: 10%;
     color: white;
+    text-shadow: 2px 2px 25px #1C2833;
+    font-size: 18px;
 }
 
 .full-height-container {
@@ -76,7 +79,7 @@
   height: 300px;
   width: 100%;
   margin-top: -50px;
-  background: url(../images/writing_background.jpg);
+  background: url(../images/writing_background_2.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -166,6 +169,7 @@ md-toolbar {
 #login_subtitle {
     font-size: 24px;
     color: #2C3E50;
+    text-align: center;
 }
 #home_logo {
     height: 75px;

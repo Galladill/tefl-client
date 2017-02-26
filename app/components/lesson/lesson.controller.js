@@ -17,6 +17,9 @@
         vm.addActivity = _addActivity;
         vm.saveLesson = _saveLesson;
         vm.saveActivity = _saveActivity;
+        vm.closeDialog = _closeDialog;
+        vm.findActivity = _findActivity;
+
         // Any logic that needs to run when the controller loads should be placed here.
         $q.all({
             lesson: lessonService.getLesson($routeParams.id),
@@ -44,8 +47,7 @@
                 vm.teacherGoals.push({ goal: '' });
             }
         });
-
-
+        
         // Define functions here
 
         function _addGoal(goalList) {
@@ -87,12 +89,18 @@
             } else {
                 // Create a new activity
                 activityService.createActivity(activity).then(function (newActivity, err) {
-                    vm.allActivities.push(newActivity);
+                    vm.allActivities.splice(0, 0, newActivity);
                     vm.addActivity(newActivity);
                     vm.saveLesson();
                     $mdDialog.hide();
                 });
             }
+        }
+
+        function _findActivity(activityId) {
+            return $.grep(vm.allActivities, function(e){
+                return e._id === activityId;
+            })[0];
         }
 
         function showSuccessToast() {
@@ -109,6 +117,10 @@
             var index = vm.lesson._activity.indexOf(activity._id);
             vm.lesson._activity.splice(index, 1);
             vm.lesson.duration -= activity.duration;
+        }
+
+        function _closeDialog() {
+            $mdDialog.hide();
         }
 
         // Add an activity to a lesson

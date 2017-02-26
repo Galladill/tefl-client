@@ -15,7 +15,7 @@
 		vm.scroll = _scroll;
 
 		// Any logic that needs to run when the controller loads should be placed here.
-
+		
 		// Define functions here.
 		function _login() {
 			delete vm.user.confirmPassword;
@@ -34,10 +34,17 @@
 			} else if (vm.user.confirmEmail !== vm.user.email) {
 				$mdToast.showSimple('Email fields must match!');
 			} else {
-				delete vm.user.confirmPassword;
-				delete vm.user.confirmEmail;
-				userService.createUser(vm.user).then(function (res) {
-					$location.path('');
+				var newUser = {
+					email: vm.user.email,
+					password: vm.user.password,
+					firstName: vm.user.firstName,
+					lastName: vm.user.lastName
+				};
+				userService.createUser(newUser).then(function (res) {
+					$mdToast.showSimple('Account Created!');
+					authService.login(vm.user.email, vm.user.password).then(function (res) {
+						$location.path('/home');
+					});
 				});
 			}
 		}

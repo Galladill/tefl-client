@@ -16,13 +16,32 @@
     text-align: center;
 }
 
+.drop-shadow {
+    background-color: rgba(0,0,0,0.2);
+-webkit-box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
+box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
+}
+
 .book-bg {
     background: url(../images/book_background.jpg) no-repeat center center fixed; 
 }
+@media (min-width: 960px) {
+    .journal-bg {
+        min-height: 100vh;
+    }
+}
 
 .journal-bg {
-    background: url(../images/journal_background.jpg) no-repeat center center fixed; 
+    
+    background: 
+        linear-gradient(
+      rgba(0, 0, 0, .6), 
+      rgba(0, 0, 0, 0)
+    ),
+    url(../images/journal_background.jpg) no-repeat center center fixed; 
 }
+
 
 .full-cover-bg {
     width: 100%;
@@ -33,12 +52,30 @@
     background-size: cover;
 }
 
+.white-text {
+    color: white !important;
+}
+
+.gray-bg {
+    background-color: #f7f7f7;
+}
+.activity-dialog { 
+    min-width: 300px;
+}
+
+@media (min-width: 960px) {
+    .activity-dialog {
+        min-width: 600px;
+    }
+}
 .no-margin {
     margin: 0;    
 }
-
+.activity-desc {
+    white-space: pre-wrap;
+}
 .goal-input {
-    /*width: 23vw !important;*/
+    width: 266px;
 }
 
 #login-header {
@@ -56,7 +93,13 @@
 }
 
 .full-height-container {
-    height: 100vh;
+    min-height: 100vh;
+}
+@media (min-width: 960px) {
+    .lesson-builder {
+        overflow-y: scroll;
+        height: 100vh
+    }
 }
 
 #no-account {
@@ -73,6 +116,20 @@
 #lesson-container {
     margin-left: 10%;
     margin-right: 10%;
+}
+
+.activity-title {
+    width: 95%;
+}
+.toolbar-placeholder {
+    height: 64px;
+}
+.lesson-toolbar {
+    position: absolute;
+}
+
+.no-underline {
+    text-decoration: none;
 }
 
 .banner {
@@ -156,6 +213,19 @@ md-toolbar {
     box-shadow: 0 2px 5px 2px rgba(50, 50, 50, 0.75);
     -webkit-box-shadow: 0 2px 5px 2px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0 2px 5px 2px rgba(50, 50, 50, 0.75);
+}
+
+@media print {    
+    button, md-button, md-toolbar, md-toast {
+        display: none !important;
+    }
+    .journal-bg {
+        background: none;
+        background-color: white;
+    }
+    .white-text {
+        color: black !important;
+    }
 }
 .newLesson-dialog {
     max-width: 300px;

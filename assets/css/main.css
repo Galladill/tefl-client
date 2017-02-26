@@ -44,7 +44,7 @@
 #login-header {
     color: white;
     padding-top: 25%;
-    text-shadow: 2px 2px 25px #1C2833;
+    font-size: 32px;
 }
 
 #slogan-text {
@@ -79,7 +79,7 @@
   height: 300px;
   width: 100%;
   margin-top: -50px;
-  background: url(../images/writing_background_2.jpg);
+  background: url(../images/writing_background.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -91,7 +91,7 @@
   color: #FFFFFF;
   text-shadow: 2px 2px 8px #000000;
   text-align: center;
-  padding-top: 5vh;
+  padding-top: 7vh;
   z-index: 1;
 }
 #home_banner_subtitle {

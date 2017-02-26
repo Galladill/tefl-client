@@ -1,0 +1,21 @@
+<md-input-container>
+    <label>Activity Title</label>
+    <input ng-model="Lesson.currentActivity.title">
+</md-input-container>
+<md-input-container>
+    <label>Duration (minutes)</label>
+    <input type="number" ng-model="Lesson.currentActivity.duration">
+</md-input-container>
+<md-input-container>
+    <md-select ng-model="Lesson.currentActivity.level" placeholder="Level" class="md-no-underline">
+        <md-option value="Any">Any</md-option>
+        <md-option value="Elementary">Elementary</md-option>
+        <md-option value="Intermediate">Intermediate</md-option>
+        <md-option value="Advanced">Advanced</md-option>
+    </md-select>
+</md-input-container>
+<md-input-container class="md-block">
+    <label>Description</label>
+    <textarea ng-model="Lesson.currentActivity.description " rows="5" md-select-on-focus></textarea>
+</md-input-container>
+<md-button class="md-primary" ng-click="Lesson.saveActivity(Lesson.currentActivity)">Save</md-button>

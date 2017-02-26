@@ -1,48 +1,77 @@
-<md-toolbar layout="row" class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings">
-        </md-button>
-        <p>
-          <span>Logo</span>
-        </p>
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <img src="/assets/images/enstruct_circle_logo.svg" id="home_logo">
+    <span flex> </span>
+    <md-button aria-label="Log Out" ng-click="Home.logout()">
+      Logout
+    </md-button>
+  </div>
 </md-toolbar>
-        
+
 <div layout="row" layout-xs="row">
   <div class="banner">
-   <p id="home_banner_title">Some Banner Text</p>
+    <p id="home_banner_title">Create. Teach. Repeat.</p>
+    <!--<p id="home_banner_subtitle" hide show-md show-sm show-gt-md flex>Dynamic Tools for ESL and TEFL Instructors</p>-->
   </div>
 </div>
 
-<div layout="row" layout-xs="row">
-  
-    <h1 class="md-title">{{user.firstName}}'s Lessons</h1>
+<div id="home_lesson_content">
+
+  <md-content layout-padding>
+
+    <h1 class="md-title" id="home_username_title">{{Home.name}}'s Lessons</h1>
+    <md-button class="md-raised md-accent white-text" hide-xs aria-labe l="Create Lesson" ng-click="Home.newLesson()">Create Lesson</md-button>
 
     <!-- sort lessons option -->
 
     <md-input-container>
-     <label>Sort</label>
-        <md-select ng-model="sort">
-          <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
-        </md-select>
-  </md-input-container>
-  
+      <md-menu md-offset="0 -5">
+        <md-button aria-label="Sort Lessons" ng-click="Home.openMenu($mdOpenMenu, $event)">
+          <md-icon class="matieral-icons">sort</md-icon>
+          Sort Lessons
+        </md-button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="Home.sortByTitle()">Title</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="Home.sortByDuration()">Duration</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="Home.sortByLevel()">Level</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-input-container>
 
-  <!-- ng-repeat logged-in user's lessons-->
+    <div id="lesson_selection" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
+      <!-- ng-repeat logged-in user's lessons-->
+      <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center"
+        ng-repeat="lesson in Home.lessons|orderBy"{{Home.sortValue}}>
+        <span>
+        <label class="lesson_frame title"><b>{{lesson.title | limitTo: 15}}</b></label>
+         <br>
+        {{lesson.level}} &#8227; {{lesson.duration}}m
+         <br><br>
+          <md-button aria-label="Edit Lesson" ng-click="Home.goToLesson(lesson._id)">
+           <md-icon class="matieral-icons">create</md-icon>
+            Edit
+           </md-button>
+           <md-button aria-label="Delete Lesson" ng-click="Home.deleteLesson(lesson._id)">
+            <md-icon class="matieral-icons">delete</md-icon>
+             Delete
+           </md-button>
+          </span>
+        </md-whiteframe>
 
 
+    </div>
+  </md-content>
 
-
-
-<md-button class="md-fab md-fab-bottom-right docs-scroll-fab"
-                 docs-scroll-class="scrolling"
-                 ng-click=""
-                 aria-label="Create Lesson">
-        <md-tooltip md-direction="top">Create Lesson</md-tooltip>
-        <md-icon aria-label="Menu" class="material-icons">create</md-icon>
-      </md-button>
+  <md-button class="md-fab md-fab-bottom-right docs-scroll-fab" docs-scroll-class="scrolling" ng-click="Home.newLesson()" aria-label="Create Lesson"
+    hide-gt-xs style="position: fixed">
+    <md-tooltip md-direction="top">Create Lesson</md-tooltip>
+    <md-icon aria-label="Menu" class="material-icons mobile">add</md-icon>
+    </md-button>
 
 </div>
-
-
-
-  
-

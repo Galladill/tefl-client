@@ -1,6 +1,6 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-    Entruct Logo
+    <img src="/assets/images/enstruct_circle_logo.svg" id="home_logo">
     <span flex> </span>
     <md-button aria-label="Log Out" ng-click="Home.logout()">
       Logout
@@ -11,7 +11,7 @@
 <div layout="row" layout-xs="row">
   <div class="banner">
     <p id="home_banner_title">Create. Teach. Repeat.</p>
-    <p id="home_banner_subtitle" hide show-md show-sm show-gt-md flex>Dynamic Tools for ESL and TEFL Instructors</p>
+    <!--<p id="home_banner_subtitle" hide show-md show-sm show-gt-md flex>Dynamic Tools for ESL and TEFL Instructors</p>-->
   </div>
 </div>
 
@@ -32,13 +32,13 @@
         </md-button>
         <md-menu-content>
           <md-menu-item>
-            <md-button ng-click="">Do Something</md-button>
+            <md-button ng-click="Home.sortByTitle()">Title</md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="">Do Something</md-button>
+            <md-button ng-click="Home.sortByDuration()">Duration</md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="">Do Something</md-button>
+            <md-button ng-click="Home.sortByLevel()">Level</md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>
@@ -47,7 +47,7 @@
     <div id="lesson_selection" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
       <!-- ng-repeat logged-in user's lessons-->
       <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center"
-        ng-repeat="lesson in Home.lessons">
+        ng-repeat="lesson in Home.lessons|orderBy"{{Home.sortValue}}>
         <span>
         <label class="lesson_frame title"><b>{{lesson.title | limitTo: 15}}</b></label>
          <br>

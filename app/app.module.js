@@ -37,4 +37,4 @@
             .accentPalette('orange');
 
     }]);
-})();
+})(); 

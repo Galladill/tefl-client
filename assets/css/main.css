@@ -80,13 +80,16 @@ box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
 
 #login-header {
     color: white;
-    padding-top: 20%;
+    padding-top: 25%;
+    font-size: 32px;
 }
 
 #slogan-text {
     margin-left: 10%;
     margin-right: 10%;
     color: white;
+    text-shadow: 2px 2px 25px #1C2833;
+    font-size: 18px;
 }
 
 .full-height-container {
@@ -145,7 +148,7 @@ box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
   color: #FFFFFF;
   text-shadow: 2px 2px 8px #000000;
   text-align: center;
-  padding-top: 5vh;
+  padding-top: 7vh;
   z-index: 1;
 }
 #home_banner_subtitle {
@@ -186,11 +189,13 @@ md-raised {
     text-align: center;
     padding: 15px;
     background-color: #FFFFFF !important;
+    color: #2C3E50;
 }
 .lesson_frame.title {
     font-size: 24px;
     max-width: 20px;
     overflow: hidden;
+    color: #2C3E50;
 }
 #home_lesson_content {
     background-color: #D7DBDD;
@@ -198,9 +203,11 @@ md-raised {
     -moz-box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
      box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
     z-index: 2;
+    color: #2C3E50;
 }
 #home_username_title {
     font-size: 28px;
+    color: #2C3E50;
 }
 md-toolbar {
     box-shadow: 0 2px 5px 2px rgba(50, 50, 50, 0.75);
@@ -222,4 +229,20 @@ md-toolbar {
 }
 .newLesson-dialog {
     max-width: 300px;
+}
+#login_logo {
+    width: auto;
+    height: 125px;
+    padding: 5px;
+    margin-top: 20px;
+}
+#login_subtitle {
+    font-size: 24px;
+    color: #2C3E50;
+    text-align: center;
+}
+#home_logo {
+    height: 75px;
+    width: auto;
+    margin-top: 30px;
 }

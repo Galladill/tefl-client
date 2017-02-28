@@ -31,16 +31,11 @@
         };
 
         this.logout = function () {
-            var url = authConfig.authUrl + '/logout';
+            var url = '/logout';
             var q = $q.defer();
             $http.post(url, {}).
                 success(function (data) {
                     delete $localStorage.tefl;
-                    service.allowedRoutes = routePermissions({});
-                    var currentPath = $route.current.$$route.originalPath;
-                    if (service.allowedRoutes.public.indexOf(currentPath) === -1) {
-                        $location.path(authConfig.loginRoute);
-                    }
                     q.resolve(data);
                 }).
                 error(function (data, status) {

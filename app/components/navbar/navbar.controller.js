@@ -14,7 +14,7 @@
 
         // Define functions here.
         function _logout() {
-            AuthService.logout().then(function(res, err) {
+            authService.logout().then(function(res, err) {
                 $location.path('/');
             });
         }

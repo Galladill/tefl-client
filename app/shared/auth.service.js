@@ -31,7 +31,7 @@
         };
 
         this.logout = function () {
-            var url = authConfig.authUrl + 'logout';
+            var url = authConfig.authUrl + '/logout';
             var q = $q.defer();
             $http.post(url, {}).
                 success(function (data) {

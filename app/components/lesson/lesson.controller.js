@@ -4,9 +4,9 @@
     angular
         .module('lesson')
         .controller('LessonController', LessonController);
-    LessonController.$inject = ['$mdSidenav', '$mdDialog', 'lessonService', 'activityService', '$q', '$mdToast', '$routeParams'];
+    LessonController.$inject = ['$mdSidenav', '$mdDialog', 'lessonService', 'activityService', '$q', '$mdToast', '$routeParams', '$location'];
 
-    function LessonController($mdSidenav, $mdDialog, lessonService, activityService, $q, $mdToast, $routeParams) {
+    function LessonController($mdSidenav, $mdDialog, lessonService, activityService, $q, $mdToast, $routeParams, $location) {
         // Attach functions to the controller here.
         var vm = this;
         vm.addGoal = _addGoal;
@@ -19,6 +19,7 @@
         vm.saveActivity = _saveActivity;
         vm.closeDialog = _closeDialog;
         vm.findActivity = _findActivity;
+        vm.goToHome = _goToHome;
 
         // Any logic that needs to run when the controller loads should be placed here.
         $q.all({
@@ -80,11 +81,15 @@
             });
         }
 
+        function _goToHome() {
+            $location.path('/home');
+        }
+
         function _saveActivity(activity) {
             if (activity._id) {
                 // Update an existing activity
                 activityService.updateActivity(activity).then(function (res, err) {
-                vm.saveLesson();
+                    vm.saveLesson();
                 });
             } else {
                 // Create a new activity

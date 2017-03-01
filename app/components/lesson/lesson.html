@@ -8,6 +8,15 @@
 					<div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
 				</div>
 			</md-input-container>
+			<md-input-container>
+				<p class="white-text">Lesson Level:</p>
+				<md-select class="white-text" ng-model="Lesson.lesson.level" placeholder="Lesson Level" class="md-no-underline">
+					<md-option value="Any">Any</md-option>
+					<md-option value="Elementary">Elementary</md-option>
+					<md-option value="Intermediate">Intermediate</md-option>
+					<md-option value="Advanced">Advanced</md-option>
+				</md-select>
+			</md-input-container>
 			<h4 class="text-center white-text no-margin ">Duration: {{Lesson.lesson.duration}}m</h4>
 		</div>
 		<div layout="column" layout-align="start center" layout-padding>
@@ -53,15 +62,19 @@
 				<md-button class="white-text" ng-click="Lesson.openSideNav()">My Activities</md-button>
 				<md-button class="white-text" ng-click="Lesson.editActivity($event)">Create Activity</md-button>
 				<md-button class="md-raised md-accent white-text" ng-click="Lesson.saveLesson()">Save Lesson</md-button>
+				<md-button class="white-text" ng-click="Lesson.goToHome()">Back to Lessons</md-button>
 			</div>
 		</md-toolbar>
 		<div class="toolbar-placeholder"></div>
 		<h4 class="md-headline text-center" ng-if="Lesson.lesson._activity.length === 0">
 			You haven't added any activities to this lesson yet. </br>
-			<a class="no-underline" ng-click="Lesson.editActivity($event)" href="">Create an activity</a> or <a ng-click="Lesson.openSideNav()" class="no-underline" href="">View your activities</a>
+			<a class="no-underline" ng-click="Lesson.editActivity($event)" href="">Create an activity</a> or
+			<a ng-click="Lesson.openSideNav()"
+				class="no-underline" href="">View your activities</a>
 		</h4>
 		<md-list ng-model="Lesson.lesson._activity">
-			<md-list-item layout="row" layout-wrap layout-align="start start" layout-padding ng-repeat="(idx, activityId) in Lesson.lesson._activity" ng-init="activity = Lesson.findActivity(activityId)">
+			<md-list-item layout="row" layout-wrap layout-align="start start" layout-padding ng-repeat="(idx, activityId) in Lesson.lesson._activity"
+				ng-init="activity = Lesson.findActivity(activityId)">
 				<div flex="100">
 					<h6 class="no-margin md-headline">{{activity.title}}</h6>
 				</div>
@@ -82,7 +95,7 @@
 					<p class="activity-desc">{{activity.description}}</p>
 					<md-divider></md-divider>
 				</div>
-			</md-list-item>
+				</md-list-item>
 		</md-list>
 	</div>
 </div>

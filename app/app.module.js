@@ -1,20 +1,23 @@
 (function () {
     var app = angular.module('app', ['ngStorage', 'ngMaterial', 'login', 'lesson', 'home']);
 
-    app.config(['$httpProvider', '$routeProvider', '$mdThemingProvider', '$mdIconProvider', '$locationProvider', function ($httpProvider, $routeProvider, $mdThemingProvider, $mdIconProvider, $locationProvider) {
+    app.config(['$httpProvider', '$routeProvider', '$mdThemingProvider', '$mdIconProvider', function ($httpProvider, $routeProvider, $mdThemingProvider, $mdIconProvider) {
         $httpProvider.interceptors.push(function () {
-            var SERVER = 'http://54.202.243.31:9001';
+            var SERVER = 'http://localhost:9001';
             return {
                 'request': function (config) {
                     if (config.url.indexOf('.html') === -1) {
                         // If this is a request to our api, attach the correct server address and auth token
                         config.url = SERVER + config.url;
                         if (window.localStorage['ngStorage-tefl']) {
+                            console.log(config.url, window.localStorage);
+                            console.log(config.url);
                             var accessToken = JSON.parse(window.localStorage['ngStorage-tefl']).accessToken;
                             var userId = JSON.parse(window.localStorage['ngStorage-tefl'])._id;
                             if (accessToken != null) {
                                 config.headers['Authorization'] = 'Bearer ' + accessToken;
                                 config.headers['user_id'] = userId;
+                                                            console.log(config.headers);
                             }
                         }
                     }
@@ -22,13 +25,15 @@
                 },
 
                 'response': function (response) {
+                    if (response.status === 403) {
+                        console.log(response);
+                    }
                     return response;
                 }
             };
         });
 
         $routeProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
 
         // Configure theme
         $mdThemingProvider.alwaysWatchTheme(true);

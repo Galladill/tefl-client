@@ -17,12 +17,10 @@
                 password: password
             };
             var q = $q.defer();
-            var user;
             $http.post(url, params).
                 success(function (data) {
-                    user = data;
                     $localStorage.tefl = data;
-                    q.resolve(user);
+                    q.resolve(data);
                 }).
                 error(function (data, status) {
                     q.reject('Error, unable to login at this time.');
@@ -47,7 +45,7 @@
         this.refresh = function () {
             var q = $q.defer();
             if ($localStorage.tefl && $localStorage.tefl.accessToken) {
-                var url = authConfig.authUrl + 'refresh';
+                var url = '/refresh';
                 var params = {
                     refreshToken: $localStorage.tefl.refreshToken
                 };

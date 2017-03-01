@@ -20,6 +20,7 @@
             $http.post(url, params).
                 success(function (data) {
                     $localStorage.tefl = data;
+                    $localStorage.$apply();
                     q.resolve(data);
                 }).
                 error(function (data, status) {

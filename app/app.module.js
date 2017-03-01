@@ -10,14 +10,11 @@
                         // If this is a request to our api, attach the correct server address and auth token
                         config.url = SERVER + config.url;
                         if (window.localStorage['ngStorage-tefl']) {
-                            console.log(config.url, window.localStorage);
-                            console.log(config.url);
                             var accessToken = JSON.parse(window.localStorage['ngStorage-tefl']).accessToken;
                             var userId = JSON.parse(window.localStorage['ngStorage-tefl'])._id;
                             if (accessToken != null) {
                                 config.headers['Authorization'] = 'Bearer ' + accessToken;
                                 config.headers['user_id'] = userId;
-                                                            console.log(config.headers);
                             }
                         }
                     }
@@ -25,9 +22,6 @@
                 },
 
                 'response': function (response) {
-                    if (response.status === 403) {
-                        console.log(response);
-                    }
                     return response;
                 }
             };

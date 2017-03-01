@@ -28,9 +28,6 @@
         }).then(function (response, err) {
             vm.allActivities = response.activities;
             vm.lesson = response.lesson;
-
-            console.log('allActivities', vm.allActivities);
-            console.log('lesson', vm.lesson);
             vm.lesson.duration = getTotalDuration();
             // ng-repeat does not like arrays of strings, so create obects instead!
             vm.studentGoals = [];
@@ -66,7 +63,6 @@
         // Open the dialog to edit/create an activity
         function _editActivity(ev, activity) {
             if (activity) {
-                console.log(activity);
                 vm.currentActivity = activity;
             } else {
                 vm.currentActivity = {};

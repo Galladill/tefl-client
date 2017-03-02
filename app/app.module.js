@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('app', ['ngStorage', 'ngMaterial', 'login', 'lesson', 'home']);
 
-    app.config(['$httpProvider', '$routeProvider', '$mdThemingProvider', '$mdIconProvider', '$locationProvider', function ($httpProvider, $routeProvider, $mdThemingProvider, $mdIconProvider, $locationProvider) {
+    app.config(['$httpProvider', '$routeProvider', '$mdThemingProvider', '$mdIconProvider', function ($httpProvider, $routeProvider, $mdThemingProvider, $mdIconProvider) {
         $httpProvider.interceptors.push(function () {
             var SERVER = 'http://54.202.243.31:9001';
             return {
@@ -28,7 +28,6 @@
         });
 
         $routeProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
 
         // Configure theme
         $mdThemingProvider.alwaysWatchTheme(true);

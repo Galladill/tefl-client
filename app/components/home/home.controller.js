@@ -23,7 +23,6 @@
         lessonService.getLessons().then(function (lessons, err) {
             // Get all user's lessons from back-end
             vm.lessons = lessons;
-            console.log(lessons);
         });
 
         vm.name = $localStorage.tefl.firstName;
@@ -47,7 +46,6 @@
                     lessonService.getLessons().then(function (lessons, err) {
                         // Get all user's lessons from back-end
                         vm.lessons = lessons;
-                        console.log(lessons);
                     });
                 });
             });
@@ -73,8 +71,11 @@
                 .cancel('Cancel');
             $mdDialog.show(confirm).then(function (result) {
                 // create new lesson with result as name
-                console.log('Creating ' + result + '...');
-                var newLesson = { title: result }
+                var newLesson = {
+                    title: result,
+                    duration: 0,
+                    level: 'Any'
+                };
                 lessonService.createLesson(newLesson).then(function (createdLesson, err) {
                     // go to new lesson  
                     $location.path('/lesson/' + createdLesson._id);

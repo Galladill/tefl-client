@@ -17,12 +17,11 @@
                 password: password
             };
             var q = $q.defer();
-            var user;
             $http.post(url, params).
                 success(function (data) {
-                    user = data;
                     $localStorage.tefl = data;
-                    q.resolve(user);
+                    $localStorage.$apply();
+                    q.resolve(data);
                 }).
                 error(function (data, status) {
                     q.reject('Error, unable to login at this time.');
@@ -31,16 +30,11 @@
         };
 
         this.logout = function () {
-            var url = authConfig.authUrl + 'logout';
+            var url = '/logout';
             var q = $q.defer();
             $http.post(url, {}).
                 success(function (data) {
                     delete $localStorage.tefl;
-                    service.allowedRoutes = routePermissions({});
-                    var currentPath = $route.current.$$route.originalPath;
-                    if (service.allowedRoutes.public.indexOf(currentPath) === -1) {
-                        $location.path(authConfig.loginRoute);
-                    }
                     q.resolve(data);
                 }).
                 error(function (data, status) {
@@ -52,7 +46,7 @@
         this.refresh = function () {
             var q = $q.defer();
             if ($localStorage.tefl && $localStorage.tefl.accessToken) {
-                var url = authConfig.authUrl + 'refresh';
+                var url = '/refresh';
                 var params = {
                     refreshToken: $localStorage.tefl.refreshToken
                 };

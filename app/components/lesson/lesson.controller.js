@@ -20,6 +20,7 @@
         vm.closeDialog = _closeDialog;
         vm.findActivity = _findActivity;
         vm.goToHome = _goToHome;
+        vm.moveActivity = _moveActivity;
 
         // Any logic that needs to run when the controller loads should be placed here.
         $q.all({
@@ -58,6 +59,13 @@
         // Open the sidenav activity list
         function _openSideNav() {
             $mdSidenav('left').toggle();
+        }
+
+        // Move/reorder and activity in the lesson
+        function _moveActivity(y, x) {
+            var temp = vm.lesson._activity[y];
+            vm.lesson._activity[y] = vm.lesson._activity[x];
+            vm.lesson._activity[x] = temp;
         }
 
         // Open the dialog to edit/create an activity

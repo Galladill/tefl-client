@@ -18,6 +18,7 @@
         vm.sortByTitle = _sortByTitle;
         vm.sortByDuration = _sortByDuration;
         vm.sortByLevel = _sortByLevel;
+        vm.reverseSort = _reverseSort;
 
         // get all user's lessons
         lessonService.getLessons().then(function (lessons, err) {
@@ -27,6 +28,7 @@
 
         vm.name = $localStorage.tefl.firstName;
         vm.sortValue = "";
+        vm.reverse = false;
 
         // Define functions here.
         function _deleteLesson(id) {
@@ -92,18 +94,21 @@
             );
         }
 
-        function _sortByTitle(sortValue) {
-            sortValue = this.title;
+        function _sortByTitle() {
+            vm.sortValue = ['title'];
         }
 
-        function _sortByDuration(lessons) {
-
+        function _sortByDuration() {
+            vm.sortValue = ['duration'];
         }
 
-        function _sortByLevel(lessons) {
-
+        function _sortByLevel() {
+            vm.sortValue = ['level'];
         }
 
+        function _reverseSort() {
+            vm.reverse = !vm.reverse;
+        }
         var originatorEv;
         function _openMenu($mdOpenMenu, ev) {
             originatorEv = ev;

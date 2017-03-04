@@ -33,12 +33,13 @@
           </md-menu-item>
         </md-menu-content>
       </md-menu>
+         <md-button ng-click="Home.reverseSort()"><md-icon class="material-icons">swap_vert</md-icon></md-button>
     </md-input-container>
 
     <div id="lesson_selection" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
       <!-- ng-repeat logged-in user's lessons-->
       <md-whiteframe class="md-whiteframe-6dp lesson_frame" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout="" layout-align="center center"
-        ng-repeat="lesson in Home.lessons|orderBy"{{Home.sortValue}}>
+        ng-repeat="lesson in Home.lessons|orderBy: Home.sortValue : Home.reverse">
         <span>
         <label class="lesson_frame title"><b>{{lesson.title | limitTo: 15}}</b></label>
          <br>

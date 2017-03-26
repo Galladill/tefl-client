@@ -216,9 +216,17 @@ md-toolbar {
 @media print {    
     #lesson-detail-column {
         page-break-after: always;
+        overflow: visible !important;
+        display: block !important;
     }
     #lesson-activity-list {
-        overflow: scroll;
+        overflow: visible !important;
+        display: block !important;
+    }
+    #lesson-builder {
+        page-break-after: always;
+        overflow: visible !important;
+        display: block !important;
     }
     .activity-in-lesson {
         page-break-inside: avoid;
@@ -234,6 +242,9 @@ md-toolbar {
         color: black !important;
     }
     #lesson-controls {
+        display: none !important;
+    }
+    #print-tooltip {
         display: none !important;
     }
 }

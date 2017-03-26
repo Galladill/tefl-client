@@ -16,6 +16,7 @@
         vm.removeActivity = _removeActivity;
         vm.addActivity = _addActivity;
         vm.saveLesson = _saveLesson;
+        vm.printLesson = _printLesson;
         vm.saveActivity = _saveActivity;
         vm.closeDialog = _closeDialog;
         vm.findActivity = _findActivity;
@@ -153,6 +154,10 @@
             lessonService.updateLesson(vm.lesson).then(function (lesson, err) {
                 showSuccessToast();
             });
+        }
+
+        function _printLesson() {
+            window.print();
         }
 
         // Get the total duration of all activities in a lesson

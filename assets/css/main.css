@@ -1,4 +1,6 @@
-
+html, body {
+    overflow-x: hidden;
+}
 .tefl-container {
     max-width: 1000px;
     margin-left: auto;
@@ -101,7 +103,6 @@ box-shadow: 0px 0px 23px 13px rgba(0,0,0,0.2);
         height: 100vh
     }
 }
-
 #no-account {
     display: block;
     margin-top: 10px;
@@ -216,6 +217,15 @@ md-toolbar {
 }
 
 @media print {    
+    #lesson-detail-column {
+        page-break-after: always;
+    }
+    #lesson-activity-list {
+        overflow: scroll;
+    }
+    .activity-in-lesson {
+        page-break-inside: avoid;
+    }
     button, md-button, md-toolbar, md-toast {
         display: none !important;
     }
@@ -225,6 +235,9 @@ md-toolbar {
     }
     .white-text {
         color: black !important;
+    }
+    #lesson-controls {
+        display: none !important;
     }
 }
 .newLesson-dialog {
@@ -245,4 +258,28 @@ md-toolbar {
     height: 75px;
     width: auto;
     margin-top: 30px;
+    cursor: pointer;
+}
+#lesson-details {
+    margin-top: 50px;
+}
+#lesson-controls {
+    background-color: #E5E7E9;
+    padding: 15px;
+    text-align: center;
+    align-content: center;
+}
+.lesson-icon {
+    padding-top: 10px;
+}
+#lesson-activity-list {
+    padding-top:25px;
+    -webkit-box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.25);
+    -moz-box-shadow:    0px -4px 3px rgba(50, 50, 50, 0.25);
+    box-shadow:         0px -4px 3px rgba(50, 50, 50, 0.25);
+}
+@media (max-width: 960px) {
+    #print-button, #download-button {
+        display: none !important;
+    }
 }

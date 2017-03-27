@@ -45,7 +45,7 @@
 					<md-icon aria-label="Add" class="material-icons">add</md-icon>
 				</md-button>
 			</div>
-			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals">
+			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals" id="teacher-goals">
 				<md-input-container class="no-margin no-error-spacer goal-input" md-no-float>
 					<input class="white-text" ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
 				</md-input-container>
@@ -70,7 +70,7 @@
 				<md-tooltip>Save Lesson</md-tooltip>
 			</md-button>
 			<md-button class="lesson-icon" ng-click="Lesson.printLesson()" id="print-button"><i class="material-icons">print</i>
-				<md-tooltip>Print Lesson</md-tooltip>
+				<md-tooltip id="print-tooltip">Print Lesson</md-tooltip>
 			</md-button>
 			<md-button class="lesson-icon" ng-click="" id="download-button"><i class="material-icons">file_download</i>
 				<md-tooltip>Download Lesson</md-tooltip>

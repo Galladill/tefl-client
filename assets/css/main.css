@@ -228,6 +228,9 @@ md-toolbar {
         overflow: visible !important;
         display: block !important;
     }
+    #teacher-goals {
+        page-break-after: always;
+    }
     .activity-in-lesson {
         page-break-inside: avoid;
     }
@@ -246,6 +249,9 @@ md-toolbar {
     }
     #print-tooltip {
         display: none !important;
+    }
+    .activity-desc {
+        font-family: "Arial", sans-serif;
     }
 }
 .newLesson-dialog {

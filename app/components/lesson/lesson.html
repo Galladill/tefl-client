@@ -1,6 +1,6 @@
 <navbar></navbar>
 <div layout-sm="column" layout-gt-sm="row" id="lesson-detail-column">
-	<div class="full-cover-bg journal-bg" flex-sm="100" flex-gt-sm="30">
+	<div class="full-cover-bg journal-bg" flex-sm="100" flex-gt-sm="30"  id="lesson-goals">
 		<div layout="column" layout-align="center center" layout-padding>
 			<md-input-container id="lesson-details">
 				<label class="white-text">Lesson Title</label>
@@ -45,7 +45,7 @@
 					<md-icon aria-label="Add" class="material-icons">add</md-icon>
 				</md-button>
 			</div>
-			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals" id="teacher-goals">
+			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals">
 				<md-input-container class="no-margin no-error-spacer goal-input" md-no-float>
 					<input class="white-text" ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
 				</md-input-container>

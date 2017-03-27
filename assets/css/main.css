@@ -228,7 +228,7 @@ md-toolbar {
         overflow: visible !important;
         display: block !important;
     }
-    #teacher-goals {
+    #lesson-goals {
         page-break-after: always;
     }
     .activity-in-lesson {

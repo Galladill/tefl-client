@@ -47,12 +47,12 @@
                 vm.teacherGoals.push({ goal: '' });
             }
             var right = document.getElementById('lesson-activity-list').style.height;
-            var left = document.getElementById('full-cover-bg').style.height;
+            var left = document.getElementById('lesson-goals').style.height;
             if (left > right) {
                 document.getElementById('lesson-activity-list').style.height = left;
             }
             else {
-                document.getElementById('full-cover-bg').style.height = right;
+                document.getElementById('lesson-goals').style.height = right;
             }
         });
 

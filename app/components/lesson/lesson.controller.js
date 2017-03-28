@@ -46,8 +46,16 @@
             if (vm.teacherGoals.length == 0) {
                 vm.teacherGoals.push({ goal: '' });
             }
+            var right = document.getElementById('lesson-activity-list').style.height;
+            var left = document.getElementById('full-cover-bg').style.height;
+            if (left > right) {
+                document.getElementById('lesson-activity-list').style.height = left;
+            }
+            else {
+                document.getElementById('full-cover-bg').style.height = right;
+            }
         });
-        
+
         // Define functions here
 
         function _addGoal(goalList) {
@@ -108,7 +116,7 @@
         }
 
         function _findActivity(activityId) {
-            return $.grep(vm.allActivities, function(e){
+            return $.grep(vm.allActivities, function (e) {
                 return e._id === activityId;
             })[0];
         }

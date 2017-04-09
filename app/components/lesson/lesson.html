@@ -1,28 +1,28 @@
 <navbar></navbar>
 <div layout-sm="column" layout-gt-sm="row" id="lesson-detail-column">
-	<div class="lesson-bg journal-bg" flex-sm="100" flex-gt-sm="30"  id="lesson-goals">
+	<div class="lesson-bg" flex-sm="100" flex-gt-sm="30"  id="lesson-goals">
 		<div layout="column" layout-align="center center" layout-padding>
 			<md-input-container id="lesson-details">
-				<label class="white-text">Lesson Title</label>
-				<input style="font-size: 2em" class="white-text" required type="text" name="title" ng-model="Lesson.lesson.title">
+				<label>Lesson Title</label>
+				<input style="font-size: 2em" required type="text" name="title" ng-model="Lesson.lesson.title">
 				<div ng-messages="lessonForm.title.$error">
 					<div ng-show="lessonForm.title.$invalid" ng-message="required">This is required.</div>
 				</div>
 			</md-input-container>
 			<md-input-container>
-				<p class="white-text">Lesson Level:</p>
-				<md-select class="white-text" ng-model="Lesson.lesson.level" placeholder="Lesson Level" class="md-no-underline">
+				<p>Lesson Level:</p>
+				<md-select ng-model="Lesson.lesson.level" placeholder="Lesson Level" class="md-no-underline">
 					<md-option value="Any">Any</md-option>
 					<md-option value="Elementary">Elementary</md-option>
 					<md-option value="Intermediate">Intermediate</md-option>
 					<md-option value="Advanced">Advanced</md-option>
 				</md-select>
 			</md-input-container>
-			<h4 class="text-center white-text no-margin ">Duration: {{Lesson.lesson.duration}}m</h4>
+			<h4 class="text-center no-margin ">Duration: {{Lesson.lesson.duration}}m</h4>
 		</div>
 		<div layout="column" layout-align="start center" layout-padding>
 			<div layout="row" layout-align="start center">
-				<h4 class="white-text ">Student Goals</h4>
+				<h4">Student Goals</h4>
 				<md-button ng-click="Lesson.addGoal(Lesson.studentGoals)" ng-disabled="Lesson.studentGoals.length >= 3" class="md-icon-button  md-primary">
 					<md-tooltip>Add Student Goal</md-tooltip>
 					<md-icon aria-label="Add" class="material-icons">add</md-icon>
@@ -30,7 +30,7 @@
 			</div>
 			<div ng-repeat="(idx, studentGoal) in Lesson.studentGoals">
 				<md-input-container class="no-margin no-error-spacer goal-input " md-no-float>
-					<input class="white-text" md-no-float class="md-block" ng-model="Lesson.studentGoals[idx].goal" placeholder="Student Goal {{idx + 1}}">
+					<input md-no-float class="md-block" ng-model="Lesson.studentGoals[idx].goal" placeholder="Student Goal {{idx + 1}}">
 				</md-input-container>
 
 				<md-button ng-click="Lesson.deleteGoal(Lesson.studentGoals, idx)" ng-disabled="Lesson.studentGoals.length == 1" class="md-icon-button md-accent">
@@ -39,7 +39,7 @@
 				</md-button>
 			</div>
 			<div layout="row" layout-align="start center">
-				<h4 class="white-text">Teacher Goals</h4>
+				<h4>Teacher Goals</h4>
 				<md-button ng-click="Lesson.addGoal(Lesson.teacherGoals)" ng-disabled="Lesson.teacherGoals.length >= 3" class="md-icon-button md-primary">
 					<md-tooltip>Add Teacher Goal</md-tooltip>
 					<md-icon aria-label="Add" class="material-icons">add</md-icon>
@@ -47,7 +47,7 @@
 			</div>
 			<div ng-repeat="(idx, teacherGoal) in Lesson.teacherGoals">
 				<md-input-container class="no-margin no-error-spacer goal-input" md-no-float>
-					<input class="white-text" ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
+					<input ng-model="Lesson.teacherGoals[idx].goal" placeholder="Teacher Goal {{idx + 1}}">
 				</md-input-container>
 				<md-button ng-click="Lesson.deleteGoal(Lesson.teacherGoals, idx)" ng-disabled="Lesson.teacherGoals.length == 1" class="md-icon-button md-accent">
 					<md-tooltip>Remove Goal</md-tooltip>

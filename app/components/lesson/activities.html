@@ -7,7 +7,7 @@
 			<a class="no-underline" ng-click="Lesson.editActivity($event)" href="">Create an activity</a>
 		</h4>
 
-		<div ng-repeat="(idx, activity) in Lesson.allActivities" layout="row" layout-align="space-between center" ng-class="{'gray-bg': idx % 2 === 0}">
+		<div ng-repeat="(idx, activity) in Lesson.allActivities" layout="row" layout-align="space-between center" ng-class="{'gray-bg': idx % 2 === 0}" id="activities-side-panel">
 			<div layout-padding>
 				<h4 class="no-margin">{{activity.title}}</h4>
 				<h6 class="no-margin">{{activity.level}} - {{activity.duration}}m</h6>
